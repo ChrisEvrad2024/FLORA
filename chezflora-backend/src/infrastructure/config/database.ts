@@ -2,6 +2,9 @@
 import { Sequelize } from 'sequelize-typescript';
 import * as dotenv from 'dotenv';
 import User from '../database/models/user.model';
+import Product from '../database/models/product.model';
+import Category from '../database/models/category.model';
+import ProductImage from '../database/models/product-image.model';
 import logger from '../logger';
 
 dotenv.config();
@@ -13,7 +16,7 @@ const sequelize = new Sequelize({
     password: process.env.DB_PASSWORD || '',
     database: process.env.DB_NAME || 'chezflora',
     logging: (msg) => logger.debug(msg),
-    models: [User], // Important : incluez le modèle User ici
+    models: [User, Product, Category, ProductImage], // Ajout des nouveaux modèles
     define: {
         timestamps: true,
         underscored: true,
@@ -25,11 +28,8 @@ export const initDatabase = async (): Promise<void> => {
         await sequelize.authenticate();
         logger.info('Connection to database has been established successfully.');
 
-        // Synchronisation en développement uniquement
-        if (process.env.NODE_ENV === 'development') {
-            await sequelize.sync({ alter: true });
-            logger.info('Database synchronized');
-        }
+        // Pas de synchronisation automatique pour conserver les données
+        // Si vous avez des modifications de schéma, utilisez les migrations
     } catch (error) {
         logger.error('Unable to connect to the database:', error);
         process.exit(1);
