@@ -1,17 +1,25 @@
-import { Table, Column, Model, DataType, HasMany, BeforeCreate, BeforeUpdate } from 'sequelize-typescript';
+// src/infrastructure/database/models/user.model.ts
+import { Table, Column, Model, DataType, BeforeCreate, BeforeUpdate } from 'sequelize-typescript';
 import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
-import { UserEntity } from '../../../domain/entities/user.entity';
 
 @Table({
     tableName: 'users',
     timestamps: true,
+    underscored: true,
 })
-export class User extends Model implements UserEntity {
+export default class User extends Model {
     @Column({
-        type: DataType.STRING,
+        type: DataType.UUID,
         primaryKey: true,
         defaultValue: () => uuidv4(),
+        indexes:[
+            // Définissez ici uniquement les index dont vous avez vraiment besoin
+            {
+                unique: true,
+                fields: ['email'],
+                name: 'users_email_unique'
+            },]
     })
     id!: string;
 
@@ -55,13 +63,13 @@ export class User extends Model implements UserEntity {
         type: DataType.ENUM('client', 'admin', 'super_admin'),
         defaultValue: 'client',
     })
-    role!: 'client' | 'admin' | 'super_admin';
+    role!: string;
 
     @Column({
         type: DataType.ENUM('active', 'inactive', 'banned'),
         defaultValue: 'active',
     })
-    status!: 'active' | 'inactive' | 'banned';
+    status!: string;
 
     @Column({
         type: DataType.DATE,
@@ -71,18 +79,18 @@ export class User extends Model implements UserEntity {
     lastLogin?: Date;
 
     @Column({
-        type: DataType.DATE,
-        field: 'created_at',
-        defaultValue: DataType.NOW,
+        type: DataType.STRING,
+        field: 'reset_password_token',
+        allowNull: true,
     })
-    createdAt!: Date;
+    resetPasswordToken?: string;
 
     @Column({
         type: DataType.DATE,
-        field: 'updated_at',
-        defaultValue: DataType.NOW,
+        field: 'reset_password_expires',
+        allowNull: true,
     })
-    updatedAt!: Date;
+    resetPasswordExpires?: Date;
 
     @BeforeCreate
     @BeforeUpdate

@@ -1,5 +1,5 @@
 // src/infrastructure/database/models/index.ts
-import { User } from './User';
+import { User } from './user.model';
 import { Address } from './Address';
 import { Category } from './Category';
 import { Product } from './Product';

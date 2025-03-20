@@ -9,6 +9,8 @@ export interface UserEntity {
     role: 'client' | 'admin' | 'super_admin';
     status: 'active' | 'inactive' | 'banned';
     lastLogin?: Date | null;
+    resetPasswordToken?: string | null;
+    resetPasswordExpires?: Date | null;
     createdAt: Date;
     updatedAt: Date;
 }

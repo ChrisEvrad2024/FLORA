@@ -1,65 +1,57 @@
 // src/infrastructure/repositories/user.repository.ts
 import { UserRepositoryInterface } from '../../interfaces/repositories/user-repository.interface';
 import { UserEntity } from '../../domain/entities/user.entity';
+import User from '../database/models/user.model'; // Assurez-vous d'importer correctement le modèle
+import { Op } from 'sequelize';
 
-// Implémentation temporaire pour le démarrage
 export class UserRepository implements UserRepositoryInterface {
-    // Simulation d'une base de données en mémoire
-    private users: UserEntity[] = [];
-
     async findById(id: string): Promise<UserEntity | null> {
-        const user = this.users.find(user => user.id === id);
-        return user || null;
+        const user = await User.findByPk(id);
+        return user ? user.toJSON() as UserEntity : null;
     }
 
     async findByEmail(email: string): Promise<UserEntity | null> {
-        const user = this.users.find(user => user.email === email);
-        return user || null;
+        const user = await User.findOne({ where: { email } });
+        return user ? user.toJSON() as UserEntity : null;
+    }
+
+    async findAll(options?: any): Promise<UserEntity[]> {
+        const users = await User.findAll(options);
+        return users.map(user => user.toJSON() as UserEntity);
     }
 
     async create(userData: Partial<UserEntity>): Promise<UserEntity> {
-        console.log('Tentative de création utilisateur:', userData);
-        const newUser = {
-            id: Math.random().toString(36).substr(2, 9),
-            firstName: userData.firstName || '',
-            lastName: userData.lastName || '',
-            email: userData.email || '',
-            password: userData.password || '',
-            phone: userData.phone || null,
-            role: userData.role || 'client',
-            status: userData.status || 'active',
-            createdAt: new Date(),
-            updatedAt: new Date(),
-            lastLogin: null
-        } as UserEntity;
-        console.log('Utilisateur créé avec succès:', newUser.id);
-        this.users.push(newUser);
-        return newUser;
+        const user = await User.create(userData);
+        return user.toJSON() as UserEntity;
     }
 
     async update(id: string, userData: Partial<UserEntity>): Promise<UserEntity | null> {
-        const index = this.users.findIndex(user => user.id === id);
+        const user = await User.findByPk(id);
 
-        if (index === -1) {
+        if (!user) {
             return null;
         }
 
-        this.users[index] = {
-            ...this.users[index],
-            ...userData,
-            updatedAt: new Date()
-        };
-
-        return this.users[index];
+        await user.update(userData);
+        return user.toJSON() as UserEntity;
     }
 
     async delete(id: string): Promise<boolean> {
-        const initialLength = this.users.length;
-        this.users = this.users.filter(user => user.id !== id);
-        return this.users.length < initialLength;
+        const result = await User.destroy({ where: { id } });
+        return result > 0;
     }
 
-    async findAll(): Promise<UserEntity[]> {
-        return this.users;
+    async findByResetToken(token: string): Promise<UserEntity | null> {
+        // Si vous utilisez Sequelize
+        const user = await User.findOne({
+            where: {
+                resetPasswordToken: token,
+                resetPasswordExpires: {
+                    [Op.gt]: new Date() // Expiration supérieure à maintenant (non expirée)
+                }
+            }
+        });
+
+        return user ? user.toJSON() as UserEntity : null;
     }
 }
