@@ -2,7 +2,8 @@
 import { Table, Column, Model, DataType, ForeignKey, BelongsTo, HasMany } from 'sequelize-typescript';
 import { v4 as uuidv4 } from 'uuid';
 import Category from './category.model';
-import ProductImage from './product-image.model';
+import CartItem from './cart-item.model';
+import OrderItem from './order-item.model';
 
 @Table({
     tableName: 'products',
@@ -54,12 +55,21 @@ export default class Product extends Model {
     stock!: number;
 
     @Column({
+        type: DataType.STRING,
+        allowNull: true,
+    })
+    image?: string;
+
+    @Column({
         type: DataType.BOOLEAN,
         field: 'is_active',
         defaultValue: true,
     })
     isActive!: boolean;
 
-    @HasMany(() => ProductImage)
-    images!: ProductImage[];
+    @HasMany(() => CartItem)
+    cartItems!: CartItem[];
+
+    @HasMany(() => OrderItem)
+    orderItems!: OrderItem[];
 }

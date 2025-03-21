@@ -1,4 +1,4 @@
-// src/app.ts - Mise à jour pour ajouter les uploads
+// src/app.ts
 import express, { Application } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -7,9 +7,7 @@ import morgan from 'morgan';
 import path from 'path';
 
 // Import des routes
-import authRoutes from './infrastructure/http/routes/auth.routes';
-import productRoutes from './infrastructure/http/routes/product.routes';
-import categoryRoutes from './infrastructure/http/routes/category.routes';
+import apiRoutes from './infrastructure/http/routes/index';
 
 // Import Middleware de gestion des erreurs
 import { errorHandler } from './infrastructure/http/middlewares/error.middleware';
@@ -50,9 +48,7 @@ class App {
     
     private initializeRoutes(): void {
         // Routes API
-        this.app.use('/api/auth', authRoutes);
-        this.app.use('/api/products', productRoutes);
-        this.app.use('/api/categories', categoryRoutes);
+        this.app.use('/api', apiRoutes);
         
         // Route de base
         this.app.get('/', (req, res) => {

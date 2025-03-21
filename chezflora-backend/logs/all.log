@@ -1546,3 +1546,107 @@
 {"level":"debug","message":"Executing (default): SELECT `Category`.`id`, `Category`.`name`, `Category`.`description`, `Category`.`image`, `Category`.`parent_id` AS `parentId`, `Category`.`created_at` AS `createdAt`, `Category`.`updated_at` AS `updatedAt`, `childCategories`.`id` AS `childCategories.id`, `childCategories`.`name` AS `childCategories.name`, `childCategories`.`description` AS `childCategories.description`, `childCategories`.`image` AS `childCategories.image`, `childCategories`.`parent_id` AS `childCategories.parentId`, `childCategories`.`created_at` AS `childCategories.createdAt`, `childCategories`.`updated_at` AS `childCategories.updatedAt`, `parentCategory`.`id` AS `parentCategory.id`, `parentCategory`.`name` AS `parentCategory.name`, `parentCategory`.`description` AS `parentCategory.description`, `parentCategory`.`image` AS `parentCategory.image`, `parentCategory`.`parent_id` AS `parentCategory.parentId`, `parentCategory`.`created_at` AS `parentCategory.createdAt`, `parentCategory`.`updated_at` AS `parentCategory.updatedAt` FROM `categories` AS `Category` LEFT OUTER JOIN `categories` AS `childCategories` ON `Category`.`id` = `childCategories`.`parent_id` LEFT OUTER JOIN `categories` AS `parentCategory` ON `Category`.`parent_id` = `parentCategory`.`id` WHERE `Category`.`id` = 'c85f1ebc-05db-11f0-a928-283a4d45aa58';","timestamp":"2025-03-20 23:44:22"}
 {"level":"debug","message":"Executing (default): SELECT count(`Product`.`id`) AS `count` FROM `products` AS `Product` LEFT OUTER JOIN `product_images` AS `images` ON `Product`.`id` = `images`.`product_id` LEFT OUTER JOIN `categories` AS `category` ON `Product`.`category_id` = `category`.`id` WHERE (`Product`.`price` >= 20 AND `Product`.`price` <= 50) AND `Product`.`category_id` = 'c85f1ebc-05db-11f0-a928-283a4d45aa58' AND `Product`.`is_active` = true;","timestamp":"2025-03-20 23:44:22"}
 {"level":"debug","message":"Executing (default): SELECT `Product`.*, `images`.`id` AS `images.id`, `images`.`product_id` AS `images.productId`, `images`.`url` AS `images.url`, `images`.`order` AS `images.order`, `images`.`created_at` AS `images.createdAt`, `images`.`updated_at` AS `images.updatedAt`, `category`.`id` AS `category.id`, `category`.`name` AS `category.name`, `category`.`description` AS `category.description`, `category`.`image` AS `category.image`, `category`.`parent_id` AS `category.parentId`, `category`.`created_at` AS `category.createdAt`, `category`.`updated_at` AS `category.updatedAt` FROM (SELECT `Product`.`id`, `Product`.`category_id` AS `categoryId`, `Product`.`name`, `Product`.`description`, `Product`.`price`, `Product`.`stock`, `Product`.`is_active` AS `isActive`, `Product`.`created_at` AS `createdAt`, `Product`.`updated_at` AS `updatedAt` FROM `products` AS `Product` WHERE (`Product`.`price` >= 20 AND `Product`.`price` <= 50) AND `Product`.`category_id` = 'c85f1ebc-05db-11f0-a928-283a4d45aa58' AND `Product`.`is_active` = true ORDER BY `Product`.`price` ASC LIMIT 0, 10) AS `Product` LEFT OUTER JOIN `product_images` AS `images` ON `Product`.`id` = `images`.`product_id` LEFT OUTER JOIN `categories` AS `category` ON `Product`.`categoryId` = `category`.`id` ORDER BY `Product`.`price` ASC;","timestamp":"2025-03-20 23:44:22"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:29:16"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:29:16"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:29:16"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:29:16"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:32:03"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:32:03"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:32:03"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:32:03"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:32:10"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:32:10"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:32:10"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:32:10"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:32:22"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:32:22"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:32:22"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:32:22"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:32:30"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:32:30"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:32:30"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:32:30"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:32:39"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:32:39"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:32:39"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:32:39"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:32:48"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:32:48"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:32:48"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:32:48"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:33:24"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:33:24"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:33:24"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:33:24"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:33:57"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:33:57"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:33:57"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:33:57"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:34:02"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:34:02"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:34:02"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:34:02"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:34:16"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:34:16"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:34:16"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:34:16"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:34:21"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:34:21"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:34:21"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:34:21"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:34:35"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:34:35"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:34:35"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:34:35"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:34:40"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:34:40"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:34:40"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:34:40"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:34:48"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:34:48"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:34:48"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:34:48"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:35:51"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:35:51"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:35:51"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:35:51"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:35:57"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:35:57"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:35:57"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:35:57"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:36:35"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:36:35"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:36:35"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:36:35"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:38:27"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:38:27"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:38:27"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:38:27"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:38:33"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:38:33"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:38:33"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:38:33"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:38:56"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:38:57"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:38:57"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:38:57"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:39:01"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:39:01"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:39:01"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:39:01"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:39:26"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:39:26"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:39:26"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:39:26"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:39:33"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:39:33"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:39:33"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:39:33"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:41:07"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:41:07"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:41:07"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:41:07"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:41:24"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-21 00:41:24"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:41:24"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-21 00:41:24"}
