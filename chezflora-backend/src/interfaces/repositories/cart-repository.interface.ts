@@ -6,6 +6,7 @@ import { UpdateCartItemDto } from '../../application/dtos/cart/update-cart-item.
 
 export interface CartRepositoryInterface {
     findByUserId(userId: string): Promise<CartResponseDto | null>;
+    findById(cartId: string): Promise<CartResponseDto | null>;
     createCart(userId: string): Promise<CartResponseDto>;
     addItemToCart(userId: string, itemData: AddToCartDto): Promise<CartItemResponseDto>;
     updateCartItem(itemId: string, userId: string, data: UpdateCartItemDto): Promise<CartItemResponseDto | null>;

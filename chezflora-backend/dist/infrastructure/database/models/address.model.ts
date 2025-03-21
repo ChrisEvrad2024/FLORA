@@ -1,26 +1,31 @@
 // src/infrastructure/database/models/address.model.ts
-import { Table, Column, Model, DataType, ForeignKey } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import { v4 as uuidv4 } from 'uuid';
 import { AddressEntity } from '../../../domain/entities/address.entity';
+import User from './user.model';
 
 @Table({
     tableName: 'addresses',
     timestamps: true,
 })
-export class Address extends Model implements AddressEntity {
+export default class Address extends Model implements AddressEntity {
     @Column({
         type: DataType.UUID,
         primaryKey: true,
         defaultValue: () => uuidv4(),
     })
-    id!: string;
+    declare id!: string;
 
+    @ForeignKey(() => User)
     @Column({
         type: DataType.UUID,
         field: 'user_id',
         allowNull: false,
     })
     userId!: string;
+
+    @BelongsTo(() => User)
+    user?: User;
 
     @Column({
         type: DataType.STRING,
@@ -87,6 +92,4 @@ export class Address extends Model implements AddressEntity {
         defaultValue: DataType.NOW,
     })
     updatedAt!: Date;
-
-    // Les associations seront définies dans index.ts
 }

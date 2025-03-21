@@ -6,6 +6,8 @@ export interface CreateBlogPostDto {
     categoryId: string;
     status?: 'draft' | 'published';
     publishDate?: Date;
+    scheduledPublishDate?: Date;
     featuredImage?: string;
     tags?: string[];
+    slug?: string;
 }

@@ -9,4 +9,5 @@ export interface UpdateBlogPostDto {
     featuredImage?: string;
     tags?: string[];
     slug?: string;
+    scheduledPublishDate?: Date | null;
 }

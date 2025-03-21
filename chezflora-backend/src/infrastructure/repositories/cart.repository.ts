@@ -7,7 +7,7 @@ import { UpdateCartItemDto } from '../../application/dtos/cart/update-cart-item.
 import Cart from '../database/models/cart.model';
 import CartItem from '../database/models/cart-item.model';
 import Product from '../database/models/product.model';
-import  sequelize  from '../config/database';
+import sequelize from '../config/database';
 import { AppError } from '../http/middlewares/error.middleware';
 
 export class CartRepository implements CartRepositoryInterface {
@@ -26,29 +26,34 @@ export class CartRepository implements CartRepositoryInterface {
             return null;
         }
 
-        // Calculer le montant total
-        const totalAmount = this.calculateTotalAmount(cart.items);
+        return this.mapToResponseDto(cart);
+    }
 
-        // Transformer les données
-        return {
-            id: cart.id,
-            userId: cart.userId,
-            items: cart.items.map((item) => ({
-                id: item.id,
-                cartId: item.cartId,
-                productId: item.productId,
-                productName: item.product.name,
-                productImage: item.product.image,
-                quantity: item.quantity,
-                unitPrice: parseFloat(item.unitPrice.toString()),
-                totalPrice: parseFloat((item.quantity * item.unitPrice).toString()),
-                createdAt: item.createdAt,
-                updatedAt: item.updatedAt,
-            })),
-            totalAmount,
-            createdAt: cart.createdAt,
-            updatedAt: cart.updatedAt,
-        };
+    async findById(cartId: string): Promise<CartResponseDto | null> {
+        try {
+            const cart = await Cart.findByPk(cartId, {
+                include: [
+                    {
+                        model: CartItem,
+                        include: [
+                            {
+                                model: Product,
+                                attributes: ['id', 'name', 'price', 'stock', 'image']
+                            }
+                        ]
+                    }
+                ]
+            });
+    
+            if (!cart) {
+                return null;
+            }
+    
+            return this.mapToResponseDto(cart);
+        } catch (error) {
+            console.error('Error finding cart by ID:', error);
+            throw error;
+        }
     }
 
     async createCart(userId: string): Promise<CartResponseDto> {
@@ -272,5 +277,31 @@ export class CartRepository implements CartRepositoryInterface {
         return items.reduce((total, item) => {
             return total + parseFloat(item.unitPrice.toString()) * item.quantity;
         }, 0);
+    }
+
+    private mapToResponseDto(cart: any): CartResponseDto {
+        // Calculer le montant total
+        const totalAmount = this.calculateTotalAmount(cart.items);
+
+        // Transformer les données
+        return {
+            id: cart.id,
+            userId: cart.userId,
+            items: cart.items.map((item: any) => ({
+                id: item.id,
+                cartId: item.cartId,
+                productId: item.productId,
+                productName: item.product?.name,
+                productImage: item.product?.image,
+                quantity: item.quantity,
+                unitPrice: parseFloat(item.unitPrice.toString()),
+                totalPrice: parseFloat((item.quantity * item.unitPrice).toString()),
+                createdAt: item.createdAt,
+                updatedAt: item.updatedAt,
+            })),
+            totalAmount,
+            createdAt: cart.createdAt,
+            updatedAt: cart.updatedAt,
+        };
     }
 }

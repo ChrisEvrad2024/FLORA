@@ -100,4 +100,14 @@ export default class BlogPost extends Model {
 
     @BelongsToMany(() => Tag, () => PostTag)
     tags!: Tag[];
+
+    @Column({
+        type: DataType.DATE,
+        allowNull: true,
+        field: 'scheduled_publish_date',
+    })
+    scheduledPublishDate?: Date;
+
+    @BelongsTo(() => User, 'userId')
+    user?: User;
 }

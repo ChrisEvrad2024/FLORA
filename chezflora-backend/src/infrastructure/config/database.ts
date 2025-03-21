@@ -23,6 +23,7 @@ import BlogCategory from '../database/models/blog-category.model';
 import Comment from '../database/models/comment.model';
 import Tag from '../database/models/tag.model';
 import PostTag from '../database/models/post-tag.model';
+import ProductImage from '../database/models/product-image.model';
 
 dotenv.config();
 
@@ -43,6 +44,7 @@ const models = [
     Invoice,
     BlogPost,
     BlogCategory,
+    ProductImage,
     Comment,
     Tag,
     PostTag
@@ -69,14 +71,31 @@ export const initDatabase = async (): Promise<void> => {
 
         // Synchronisation en développement uniquement
         if (process.env.NODE_ENV === 'development') {
-            // Désactiver les vérifications de clés étrangères
-            await sequelize.query('SET FOREIGN_KEY_CHECKS = 0');
-            await sequelize.sync({ force: true });
-            // Réactiver les vérifications de clés étrangères
-            await sequelize.query('SET FOREIGN_KEY_CHECKS = 1');
-            logger.info('Database synchronized');
+            try {
+                // Désactiver les vérifications de clés étrangères
+                await sequelize.query('SET FOREIGN_KEY_CHECKS = 0');
+                
+                // Méthode sécurisée: synchroniser chaque modèle individuellement
+                for (const model of models) {
+                    try {
+                        await sequelize.models[model.name].sync({ alter: true });
+                        logger.info(`Model ${model.name} synchronized`);
+                    } catch (error: any) {
+                        // Typage 'any' pour accéder à la propriété message
+                        logger.warn(`Error synchronizing model ${model.name}: ${error.message || error}`);
+                        // Continuer avec le prochain modèle même si celui-ci échoue
+                    }
+                }
+                
+                // Réactiver les vérifications de clés étrangères
+                await sequelize.query('SET FOREIGN_KEY_CHECKS = 1');
+                logger.info('Database synchronized safely');
+            } catch (error: any) {
+                logger.error('Error during model synchronization:', error);
+                // Ne pas quitter le processus, permettre à l'application de démarrer
+            }
         }
-    } catch (error) {
+    } catch (error: any) {
         logger.error('Unable to connect to the database:', error);
         process.exit(1);
     }

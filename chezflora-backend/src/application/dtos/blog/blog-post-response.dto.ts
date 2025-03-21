@@ -9,6 +9,7 @@ export interface BlogPostResponseDto {
     userId: string;
     status: 'draft' | 'published' | 'archived';
     publishDate?: Date;
+    scheduledPublishDate?: Date;
     featuredImage?: string;
     views: number;
     author?: {

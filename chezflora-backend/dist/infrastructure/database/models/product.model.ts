@@ -41,7 +41,12 @@ export default class Product extends Model {
     description?: string;
 
     @Column({
-        type: DataType.DECIMAL(10, 2),
+        type: DataType.DECIMAL(10, 2), static associate(models: any) {
+            Product.hasMany(models.ProductImage, {
+                foreignKey: 'productId',
+                as: 'images'
+            });
+        }
         allowNull: false,
     })
     price!: number;
