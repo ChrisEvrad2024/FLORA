@@ -1,9 +1,9 @@
 // src/infrastructure/http/controllers/order.controller.ts
 import { Request, Response, NextFunction } from 'express';
-import { OrderServiceInterface } from '../../../interfaces/services/order-service.interface';
-import { CreateOrderDto } from '../../../application/dtos/order/create-order.dto';
-import { UpdateOrderStatusDto } from '../../../application/dtos/order/update-order-status.dto';
-import { AppError } from '../middlewares/error.middleware';
+import { OrderServiceInterface } from '../../interfaces/services/order-service.interface';
+import { CreateOrderDto } from '../../application/dtos/order/create-order.dto';
+import { UpdateOrderStatusDto } from '../../application/dtos/order/update-order.dto';
+import { AppError } from '../middlewares/error-middleware.interface';
 
 export class OrderController {
     constructor(private orderService: OrderServiceInterface) {}

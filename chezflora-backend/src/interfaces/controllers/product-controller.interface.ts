@@ -1,9 +1,8 @@
 // src/interfaces/controllers/product.controller.ts
 import { Request, Response } from 'express';
-import { validationResult } from 'express-validator';
-import { GetProductsUseCase } from '../../application/use-cases/product/get-products.use-case';
-import { GetProductDetailUseCase } from '../../application/use-cases/product/get-product-detail.use-case';
-import { ProductRepository } from '../../domain/repositories/product.repository';
+import { GetProductsUseCase, GetProductDetailUseCase } from '../../application/use-cases/product/product-use-cases';
+import { ProductRepository } from '../../domain/repositories/product-repository.interface';
+
 
 export class ProductController {
     constructor(private readonly productRepository: ProductRepository) { }

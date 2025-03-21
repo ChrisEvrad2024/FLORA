@@ -1,3 +1,5 @@
+import { QuoteItemDto } from "./quote-item.dto";
+
 // src/application/dtos/quote/update-quote.dto.ts
 export interface UpdateQuoteDto {
     status?: 'processing' | 'sent' | 'accepted' | 'rejected';

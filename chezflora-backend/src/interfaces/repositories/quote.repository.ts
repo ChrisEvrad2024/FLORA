@@ -5,12 +5,12 @@ import { CreateQuoteDto } from '../../application/dtos/quote/create-quote.dto';
 import { UpdateQuoteDto } from '../../application/dtos/quote/update-quote.dto';
 import { QuoteItemDto } from '../../application/dtos/quote/quote-item.dto';
 import { RespondToQuoteDto } from '../../application/dtos/quote/respond-to-quote.dto';
-import Quote from '../database/models/quote.model';
-import QuoteItem from '../database/models/quote-item.model';
-import Product from '../database/models/product.model';
-import User from '../database/models/user.model';
-import { sequelize } from '../config/database';
-import { AppError } from '../http/middlewares/error.middleware';
+import Quote from '../../infrastructure/database/models/quote.model';
+import QuoteItem from '../../infrastructure/database/models/quote-item.model';
+import Product from '../../infrastructure/database/models/product.model';
+import User from '../../infrastructure/database/models/user.model';
+import sequelize  from '../../infrastructure/config/database';
+import { AppError } from '../../infrastructure/http/middlewares/error.middleware';
 import { Op } from 'sequelize';
 
 export class QuoteRepository implements QuoteRepositoryInterface {

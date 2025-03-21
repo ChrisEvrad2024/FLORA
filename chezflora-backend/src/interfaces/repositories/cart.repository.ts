@@ -4,11 +4,11 @@ import { CartResponseDto } from '../../application/dtos/cart/cart-response.dto';
 import { CartItemResponseDto } from '../../application/dtos/cart/cart-item-response.dto';
 import { AddToCartDto } from '../../application/dtos/cart/add-to-cart.dto';
 import { UpdateCartItemDto } from '../../application/dtos/cart/update-cart-item.dto';
-import Cart from '../database/models/cart.model';
-import CartItem from '../database/models/cart-item.model';
-import Product from '../database/models/product.model';
-import { sequelize } from '../config/database';
-import { AppError } from '../http/middlewares/error.middleware';
+import Cart from '../../infrastructure/database/models/cart.model';
+import CartItem from '../../infrastructure/database/models/cart-item.model';
+import Product from '../../infrastructure/database/models/product.model';
+import  sequelize  from '../../infrastructure/config/database';
+import { AppError } from '../../infrastructure/http/middlewares/error.middleware';
 
 export class CartRepository implements CartRepositoryInterface {
     async findByUserId(userId: string): Promise<CartResponseDto | null> {

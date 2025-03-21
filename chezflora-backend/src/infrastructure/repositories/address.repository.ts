@@ -5,7 +5,7 @@ import { CreateAddressDto } from '../../application/dtos/address/create-address.
 import { UpdateAddressDto } from '../../application/dtos/address/update-address.dto';
 import Address from '../database/models/address.model';
 import { Op } from 'sequelize';
-import { sequelize } from '../config/database';
+import  sequelize  from '../config/database';
 
 export class AddressRepository implements AddressRepositoryInterface {
     async findById(id: string): Promise<AddressResponseDto | null> {

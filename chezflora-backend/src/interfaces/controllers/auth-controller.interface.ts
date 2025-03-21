@@ -1,9 +1,8 @@
 // src/interfaces/controllers/auth.controller.ts
 import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
-import { RegisterUserUseCase } from '../../application/use-cases/auth/register.use-case';
-import { LoginUserUseCase } from '../../application/use-cases/auth/login.use-case';
-import { UserRepository } from '../../domain/repositories/user.repository';
+import { RegisterUserUseCase, LoginUserUseCase } from '../../application/use-cases/auth/register-user.use-case';
+import { UserRepository } from '../../domain/repositories/user-repository.interface';
 
 export class AuthController {
     constructor(private readonly userRepository: UserRepository) { }

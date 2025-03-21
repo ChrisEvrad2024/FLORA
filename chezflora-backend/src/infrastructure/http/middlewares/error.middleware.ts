@@ -1,6 +1,6 @@
 // src/infrastructure/http/middlewares/error.middleware.ts
 import { Request, Response, NextFunction } from 'express';
-
+import { Sequelize } from 'sequelize';
 export class AppError extends Error {
     statusCode: number;
 

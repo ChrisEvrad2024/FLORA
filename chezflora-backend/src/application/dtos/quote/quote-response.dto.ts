@@ -1,3 +1,5 @@
+import { QuoteItemResponseDto } from "./quote-item-response.dto";
+
 // src/application/dtos/quote/quote-response.dto.ts
 export interface QuoteResponseDto {
     id: string;

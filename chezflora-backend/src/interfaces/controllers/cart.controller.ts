@@ -1,9 +1,24 @@
 // src/infrastructure/http/controllers/cart.controller.ts
 import { Request, Response, NextFunction } from 'express';
-import { CartServiceInterface } from '../../../interfaces/services/cart-service.interface';
-import { AddToCartDto } from '../../../application/dtos/cart/add-to-cart.dto';
-import { UpdateCartItemDto } from '../../../application/dtos/cart/update-cart-item.dto';
-import { AppError } from '../middlewares/error.middleware';
+import { AppError } from '../../infrastructure/http/middlewares/error.middleware';
+
+// Définition des interfaces et types manquants
+interface CartServiceInterface {
+    getUserCart(userId: string): Promise<any>;
+    addToCart(userId: string, itemData: AddToCartDto): Promise<any>;
+    updateCartItem(itemId: string, userId: string, data: UpdateCartItemDto): Promise<any>;
+    removeCartItem(itemId: string, userId: string): Promise<boolean>;
+    clearCart(userId: string): Promise<boolean>;
+}
+
+interface AddToCartDto {
+    productId: string;
+    quantity: number;
+}
+
+interface UpdateCartItemDto {
+    quantity: number;
+}
 
 export class CartController {
     constructor(private cartService: CartServiceInterface) {}

@@ -3,15 +3,15 @@ import { OrderRepositoryInterface } from '../../interfaces/repositories/order-re
 import { OrderResponseDto } from '../../application/dtos/order/order-response.dto';
 import { CreateOrderDto } from '../../application/dtos/order/create-order.dto';
 import { UpdateOrderStatusDto } from '../../application/dtos/order/update-order-status.dto';
-import Order from '../database/models/order.model';
-import OrderItem from '../database/models/order-item.model';
-import Product from '../database/models/product.model';
-import Cart from '../database/models/cart.model';
-import CartItem from '../database/models/cart-item.model';
-import { sequelize } from '../config/database';
-import { AppError } from '../http/middlewares/error.middleware';
-import Address from '../database/models/address.model';
-import User from '../database/models/user.model';
+import Order from '../../infrastructure/database/models/order.model';
+import OrderItem from '../../infrastructure/database/models/order-item.model';
+import Product from '../../infrastructure/database/models/product.model';
+import Cart from '../../infrastructure/database/models/cart.model';
+import CartItem from '../../infrastructure/database/models/cart-item.model';
+import sequelize  from '../../infrastructure/config/database';
+import { AppError } from '../../infrastructure/http/middlewares/error.middleware';
+import Address from '../../infrastructure/database/models/address.model';
+import User from '../../infrastructure/database/models/user.model';
 
 export class OrderRepository implements OrderRepositoryInterface {
     async findById(id: string): Promise<OrderResponseDto | null> {
