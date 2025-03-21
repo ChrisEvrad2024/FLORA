@@ -9,6 +9,9 @@ import favoriteRoutes from './favorite.routes';
 import newsletterRoutes from './newsletter.routes';
 import dashboardRoutes from './dashboard.routes';
 import invoiceRoutes from './invoice.routes';
+import blogCategoryRoutes from './blog-category.routes';
+import blogPostRoutes from './blog-post.routes';
+import commentRoutes from './comment.routes';
 
 const router = Router();
 
@@ -22,5 +25,8 @@ router.use('/favorites', favoriteRoutes);
 router.use('/newsletter', newsletterRoutes);
 router.use('/dashboard', dashboardRoutes);
 router.use('/invoices', invoiceRoutes);
+router.use('/blog/posts', blogPostRoutes);
+router.use('/blog/categories', blogCategoryRoutes);
+router.use('/blog/comments', commentRoutes);
 
 export default router;

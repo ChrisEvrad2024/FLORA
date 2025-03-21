@@ -18,6 +18,11 @@ import QuoteItem from '../database/models/quote-item.model';
 import Favorite from '../database/models/favorite.model';
 import NewsletterSubscription from '../database/models/newsletter-subscription.model';
 import Invoice from '../database/models/invoice.model';
+import BlogPost from '../database/models/blog-post.model';
+import BlogCategory from '../database/models/blog-category.model';
+import Comment from '../database/models/comment.model';
+import Tag from '../database/models/tag.model';
+import PostTag from '../database/models/post-tag.model';
 
 dotenv.config();
 
@@ -35,7 +40,12 @@ const models = [
     QuoteItem,
     Favorite,
     NewsletterSubscription,
-    Invoice
+    Invoice,
+    BlogPost,
+    BlogCategory,
+    Comment,
+    Tag,
+    PostTag
 ];
 
 export const sequelize = new Sequelize({

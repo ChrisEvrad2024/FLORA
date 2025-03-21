@@ -115,3 +115,23 @@ VALUES
 
 -- Images Sécateur
 (UUID(), @secateur_id, 'https://images.pexels.com/photos/1002703/pexels-photo-1002703.jpeg', 0, NOW(), NOW());
+
+
+##############################################################USERS###########################################
+-- Désactiver les vérifications de clés étrangères (si nécessaire)
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- Insérer les utilisateurs
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `phone`, `role`, `status`, `created_at`, `updated_at`) 
+VALUES 
+-- Super admin
+(UUID(), 'omgba', 'omgba', 'omgba@gmail.com', '$2b$10$YourHashedPasswordHere', 'omgba', 'super_admin', 'active', NOW(), NOW()),
+
+-- Admin
+(UUID(), 'omgbaa', 'omgbaa', 'omgbaa@gmail.com', '$2b$10$YourHashedPasswordHere', '00000000', 'admin', 'active', NOW(), NOW()),
+
+-- Client (nouvel utilisateur)
+(UUID(), 'John', 'Doe', 'client@example.com', '$2b$10$YourHashedPasswordHere', '12345678', 'client', 'active', NOW(), NOW());
+
+-- Réactiver les vérifications de clés étrangères
+SET FOREIGN_KEY_CHECKS = 1;
