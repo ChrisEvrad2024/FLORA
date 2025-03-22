@@ -9,6 +9,7 @@ import favoriteRoutes from './favorite.routes';
 import newsletterRoutes from './newsletter.routes';
 import dashboardRoutes from './dashboard.routes';
 import invoiceRoutes from './invoice.routes';
+import blogRoutes from './blog.routes'; // Importer les routes du blog
 
 const router = Router();
 
@@ -22,5 +23,6 @@ router.use('/favorites', favoriteRoutes);
 router.use('/newsletter', newsletterRoutes);
 router.use('/dashboard', dashboardRoutes);
 router.use('/invoices', invoiceRoutes);
+router.use('/blog', blogRoutes);
 
 export default router;

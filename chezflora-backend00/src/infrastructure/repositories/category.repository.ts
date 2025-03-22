@@ -3,6 +3,8 @@ import { CategoryRepositoryInterface } from '../../interfaces/repositories/categ
 import { CategoryEntity } from '../../domain/entities/category.entity';
 import Category from '../database/models/category.model';
 import Product from '../database/models/product.model';
+import { BlogCategoryResponseDto } from '../../application/dtos/blog/blog-category.dto';
+import BlogCategory from '../database/models/blog-category.model';
 
 export class CategoryRepository implements CategoryRepositoryInterface {
     async findAll(options?: {
@@ -166,5 +168,26 @@ export class CategoryRepository implements CategoryRepositoryInterface {
         });
         
         return rootCategories.map(category => category.toJSON() as CategoryEntity);
+    }
+    async findBySlug(slug: string): Promise<BlogCategoryResponseDto | null> {
+        // Simplifions la requête pour éviter l'erreur
+        const category = await BlogCategory.findOne({
+            where: { slug },
+            // Retirons la sous-requête problématique pour l'instant
+            // Nous ajouterons le comptage après avoir confirmé que ça fonctionne
+        });
+    
+        if (!category) {
+            return null;
+        }
+    
+        return {
+            id: category.id,
+            name: category.name,
+            description: category.description,
+            slug: category.slug,
+            createdAt: category.createdAt,
+            updatedAt: category.updatedAt,
+        };
     }
 }
