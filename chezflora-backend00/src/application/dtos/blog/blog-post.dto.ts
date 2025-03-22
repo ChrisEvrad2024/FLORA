@@ -1,4 +1,6 @@
 // src/application/dtos/blog/blog-post.dto.ts
+import { BlogTagResponseDto } from './blog-tag.dto';
+
 export interface BlogPostDto {
     categoryId: string;
     title: string;
@@ -6,6 +8,7 @@ export interface BlogPostDto {
     excerpt?: string;
     featuredImage?: string;
     status?: 'draft' | 'published' | 'archived';
+    tags?: string[] | { id: string; name: string }[];
 }
 
 export interface BlogPostResponseDto {
@@ -24,4 +27,6 @@ export interface BlogPostResponseDto {
     createdAt: Date;
     updatedAt: Date;
     commentCount?: number;
+    tags?: BlogTagResponseDto[];
+    viewCount?: number;
 }

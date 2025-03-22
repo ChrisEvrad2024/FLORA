@@ -1,17 +1,23 @@
 // src/application/services/blog/blog-post.service.ts
 import { BlogPostRepositoryInterface } from '../../../interfaces/repositories/blog-post-repository.interface';
+import { BlogTagRepositoryInterface } from '../../../interfaces/repositories/blog-tag-repository.interface';
 import { BlogPostDto, BlogPostResponseDto } from '../../../application/dtos/blog/blog-post.dto';
 import { AppError } from '../../../infrastructure/http/middlewares/error.middleware';
 import slugify from 'slugify';
 
 export class BlogPostService {
-    constructor(private blogPostRepository: BlogPostRepositoryInterface) {}
+    constructor(
+        private blogPostRepository: BlogPostRepositoryInterface,
+        private blogTagRepository: BlogTagRepositoryInterface
+    ) {}
 
     async getAllPosts(options?: {
         categoryId?: string;
+        tagId?: string;
         status?: string;
         page?: number;
         limit?: number;
+        search?: string;
     }): Promise<{ posts: BlogPostResponseDto[]; total: number; totalPages: number }> {
         const page = options?.page || 1;
         const limit = options?.limit || 10;
@@ -23,6 +29,12 @@ export class BlogPostService {
         });
         
         const totalPages = Math.ceil(total / limit);
+        
+        // Pour chaque post, récupérer les tags associés
+        for (const post of posts) {
+            const tags = await this.blogTagRepository.findByPostId(post.id);
+            post.tags = tags;
+        }
         
         return {
             posts,
@@ -38,6 +50,10 @@ export class BlogPostService {
             throw new AppError('Post not found', 404);
         }
         
+        // Récupérer les tags associés au post
+        const tags = await this.blogTagRepository.findByPostId(id);
+        post.tags = tags;
+        
         return post;
     }
 
@@ -47,6 +63,10 @@ export class BlogPostService {
         if (!post) {
             throw new AppError('Post not found', 404);
         }
+        
+        // Récupérer les tags associés au post
+        const tags = await this.blogTagRepository.findByPostId(post.id);
+        post.tags = tags;
         
         return post;
     }
@@ -67,12 +87,35 @@ export class BlogPostService {
         // Ensure status has a default value if not provided
         const status = postData.status || 'draft';
         
-        return this.blogPostRepository.create(authorId, {
+        // Créer le post
+        const post = await this.blogPostRepository.create(authorId, {
             ...postData,
             slug,
             excerpt,
             status
         });
+        
+        // Si des tags sont fournis, les associer au post
+        if (postData.tags && Array.isArray(postData.tags) && postData.tags.length > 0) {
+            // Si ce sont des noms de tags, créer ou récupérer les tags existants
+            if (typeof postData.tags[0] === 'string') {
+                const tagObjects = await Promise.all(
+                    (postData.tags as string[]).map(tagName => 
+                        this.blogTagRepository.findOrCreateByName(tagName)
+                    )
+                );
+                const tagIds = tagObjects.map(tag => tag.id);
+                await this.blogTagRepository.setPostTags(post.id, tagIds);
+            } 
+            // Si ce sont des IDs de tags
+            else if (typeof postData.tags[0] === 'object' && postData.tags[0].id) {
+                const tagIds = (postData.tags as any[]).map(tag => tag.id);
+                await this.blogTagRepository.setPostTags(post.id, tagIds);
+            }
+        }
+        
+        // Récupérer le post avec les tags
+        return this.getPostById(post.id);
     }
 
     async updatePost(id: string, postData: Partial<BlogPostDto>): Promise<BlogPostResponseDto> {
@@ -100,6 +143,7 @@ export class BlogPostService {
             throw new AppError('Post not found', 404);
         }
         
+        // Mettre à jour le post
         const post = await this.blogPostRepository.update(id, {
             ...postData,
             status: postData.status || existingPost.status,
@@ -107,11 +151,32 @@ export class BlogPostService {
             excerpt: excerpt || postData.excerpt || existingPost.excerpt
         });
         
-        if (!post) {
-            throw new AppError('Post not found', 404);
+        // Si des tags sont fournis, mettre à jour les associations
+        if (postData.tags && Array.isArray(postData.tags)) {
+            // Si ce sont des noms de tags, créer ou récupérer les tags existants
+            if (postData.tags.length > 0) {
+                if (typeof postData.tags[0] === 'string') {
+                    const tagObjects = await Promise.all(
+                        (postData.tags as string[]).map(tagName => 
+                            this.blogTagRepository.findOrCreateByName(tagName)
+                        )
+                    );
+                    const tagIds = tagObjects.map(tag => tag.id);
+                    await this.blogTagRepository.setPostTags(id, tagIds);
+                } 
+                // Si ce sont des IDs de tags
+                else if (typeof postData.tags[0] === 'object' && postData.tags[0].id) {
+                    const tagIds = (postData.tags as any[]).map(tag => tag.id);
+                    await this.blogTagRepository.setPostTags(id, tagIds);
+                }
+            } else {
+                // Si le tableau est vide, supprimer toutes les associations
+                await this.blogTagRepository.setPostTags(id, []);
+            }
         }
         
-        return post;
+        // Récupérer le post mis à jour avec les tags
+        return this.getPostById(id);
     }
 
     async deletePost(id: string): Promise<boolean> {
@@ -131,6 +196,10 @@ export class BlogPostService {
             throw new AppError('Post not found', 404);
         }
         
+        // Récupérer les tags associés au post
+        const tags = await this.blogTagRepository.findByPostId(id);
+        post.tags = tags;
+        
         return post;
     }
 
@@ -140,6 +209,10 @@ export class BlogPostService {
         if (!post) {
             throw new AppError('Post not found', 404);
         }
+        
+        // Récupérer les tags associés au post
+        const tags = await this.blogTagRepository.findByPostId(id);
+        post.tags = tags;
         
         return post;
     }
