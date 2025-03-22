@@ -1,37 +1,30 @@
 // src/application/services/blog/blog-comment.service.ts
 import { BlogCommentRepositoryInterface } from '../../../interfaces/repositories/blog-comment-repository.interface';
-import { BlogCommentDto, BlogCommentResponseDto } from '../../../application/dtos/blog/blog-comment.dto';
+import { BlogCommentDto, BlogCommentResponseDto } from '../../dtos/blog/blog-comment.dto';
 import { AppError } from '../../../infrastructure/http/middlewares/error.middleware';
 import { BlogCommentApprovedEvent } from '../../events/blog/comment-approved.event';
 import { BlogEventsHandler } from '../../events/handlers/blog-events.handler';
 
 export class BlogCommentService {
-    constructor(private blogCommentRepository: BlogCommentRepositoryInterface) {}
+    constructor(
+        private blogCommentRepository: BlogCommentRepositoryInterface
+    ) {}
 
-    async getCommentsByPostId(postId: string, options?: {
-        status?: string;
-        page?: number;
-        limit?: number;
-    }): Promise<{ comments: BlogCommentResponseDto[]; total: number; totalPages: number }> {
-        const page = options?.page || 1;
-        const limit = options?.limit || 10;
-        
-        const { comments, total } = await this.blogCommentRepository.findByPostId(postId, {
-            ...options,
-            page,
-            limit
-        });
-        
-        const totalPages = Math.ceil(total / limit);
-        
-        return {
-            comments,
-            total,
-            totalPages
-        };
+    async getCommentsByPostId(
+        postId: string,
+        options?: {
+            status?: string;
+            page?: number;
+            limit?: number;
+        }
+    ): Promise<{ comments: BlogCommentResponseDto[]; total: number }> {
+        return this.blogCommentRepository.findByPostId(postId, options);
     }
 
-    async createComment(userId: string, commentData: BlogCommentDto): Promise<BlogCommentResponseDto> {
+    async createComment(
+        userId: string,
+        commentData: Omit<BlogCommentDto, 'id' | 'userId' | 'status' | 'createdAt' | 'updatedAt'>
+    ): Promise<BlogCommentResponseDto> {
         return this.blogCommentRepository.create(userId, commentData);
     }
 
@@ -42,9 +35,9 @@ export class BlogCommentService {
             throw new AppError('Comment not found', 404);
         }
         
-        // Déclencher l'événement d'approbation du commentaire
-        const approvalEvent = new BlogCommentApprovedEvent(comment, approvedBy);
-        BlogEventsHandler.handleCommentApproved(approvalEvent);
+        // Déclencher l'événement d'approbation
+        const commentApprovedEvent = new BlogCommentApprovedEvent(comment, approvedBy);
+        BlogEventsHandler.handleCommentApproved(commentApprovedEvent);
         
         return comment;
     }

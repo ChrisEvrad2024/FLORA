@@ -4,12 +4,10 @@ export interface BlogCommentDto {
     content: string;
 }
 
-export interface BlogCommentResponseDto {
+export interface BlogCommentResponseDto extends BlogCommentDto {
     id: string;
-    postId: string;
     userId: string;
     userName: string;
-    content: string;
     status: string;
     createdAt: Date;
     updatedAt: Date;

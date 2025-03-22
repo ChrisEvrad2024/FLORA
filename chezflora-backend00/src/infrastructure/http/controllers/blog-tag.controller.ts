@@ -7,11 +7,10 @@ export class BlogTagController {
 
     getTags = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
-            const tags = await this.blogTagService.getAllTags();
+            const tags = await this.blogTagService.getTags();
             
             res.status(200).json({
                 success: true,
-                message: 'Tags retrieved successfully',
                 data: tags
             });
         } catch (error) {
@@ -22,11 +21,11 @@ export class BlogTagController {
     getTagById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const { id } = req.params;
+            
             const tag = await this.blogTagService.getTagById(id);
             
             res.status(200).json({
                 success: true,
-                message: 'Tag retrieved successfully',
                 data: tag
             });
         } catch (error) {
@@ -37,11 +36,11 @@ export class BlogTagController {
     getTagBySlug = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const { slug } = req.params;
+            
             const tag = await this.blogTagService.getTagBySlug(slug);
             
             res.status(200).json({
                 success: true,
-                message: 'Tag retrieved successfully',
                 data: tag
             });
         } catch (error) {
@@ -52,11 +51,11 @@ export class BlogTagController {
     getTagsByPostId = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const { postId } = req.params;
+            
             const tags = await this.blogTagService.getTagsByPostId(postId);
             
             res.status(200).json({
                 success: true,
-                message: 'Tags retrieved successfully',
                 data: tags
             });
         } catch (error) {
@@ -67,6 +66,7 @@ export class BlogTagController {
     createTag = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const tagData = req.body;
+            
             const tag = await this.blogTagService.createTag(tagData);
             
             res.status(201).json({
@@ -83,6 +83,7 @@ export class BlogTagController {
         try {
             const { id } = req.params;
             const tagData = req.body;
+            
             const tag = await this.blogTagService.updateTag(id, tagData);
             
             res.status(200).json({
@@ -98,6 +99,7 @@ export class BlogTagController {
     deleteTag = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const { id } = req.params;
+            
             await this.blogTagService.deleteTag(id);
             
             res.status(200).json({
@@ -112,6 +114,7 @@ export class BlogTagController {
     addTagToPost = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const { postId, tagId } = req.params;
+            
             await this.blogTagService.addTagToPost(postId, tagId);
             
             res.status(200).json({
@@ -126,6 +129,7 @@ export class BlogTagController {
     removeTagFromPost = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const { postId, tagId } = req.params;
+            
             await this.blogTagService.removeTagFromPost(postId, tagId);
             
             res.status(200).json({
@@ -141,14 +145,6 @@ export class BlogTagController {
         try {
             const { postId } = req.params;
             const { tagIds } = req.body;
-            
-            if (!Array.isArray(tagIds)) {
-                res.status(400).json({
-                    success: false,
-                    message: 'tagIds must be an array'
-                });
-                return;
-            }
             
             await this.blogTagService.setPostTags(postId, tagIds);
             

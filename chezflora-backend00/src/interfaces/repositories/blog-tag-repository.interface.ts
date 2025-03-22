@@ -1,5 +1,5 @@
 // src/interfaces/repositories/blog-tag-repository.interface.ts
-import { BlogTagResponseDto } from '../../application/dtos/blog/blog-tag.dto';
+import { BlogTagResponseDto } from "../../application/dtos/blog/blog-tag.dto";
 
 export interface BlogTagRepositoryInterface {
     findAll(): Promise<BlogTagResponseDto[]>;

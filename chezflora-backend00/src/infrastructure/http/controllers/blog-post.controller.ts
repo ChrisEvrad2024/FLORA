@@ -11,9 +11,9 @@ export class BlogPostController {
             const categoryId = req.query.categoryId as string;
             const tagId = req.query.tagId as string;
             const status = req.query.status as string;
-            const search = req.query.search as string;
             const page = parseInt(req.query.page as string) || 1;
             const limit = parseInt(req.query.limit as string) || 10;
+            const search = req.query.search as string;
             
             const { posts, total, totalPages } = await this.blogPostService.getAllPosts({
                 categoryId,
@@ -26,7 +26,6 @@ export class BlogPostController {
             
             res.status(200).json({
                 success: true,
-                message: 'Posts retrieved successfully',
                 data: posts,
                 pagination: {
                     current: page,
@@ -43,11 +42,11 @@ export class BlogPostController {
     getPostById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const { id } = req.params;
+            
             const post = await this.blogPostService.getPostById(id);
             
             res.status(200).json({
                 success: true,
-                message: 'Post retrieved successfully',
                 data: post
             });
         } catch (error) {
@@ -58,11 +57,14 @@ export class BlogPostController {
     getPostBySlug = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const { slug } = req.params;
+            
             const post = await this.blogPostService.getPostBySlug(slug);
+            
+            // For view tracking middleware
+            res.locals.blogPost = post;
             
             res.status(200).json({
                 success: true,
-                message: 'Post retrieved successfully',
                 data: post
             });
         } catch (error) {
@@ -78,11 +80,23 @@ export class BlogPostController {
                 throw new AppError('Authentication required', 401);
             }
             
-            const postData = req.body;
+            // Handle file upload (if any)
+            const featuredImage = req.file ? req.file.path : undefined;
             
-            // Si une URL d'image est fournie dans le body (issue de l'upload)
-            if (req.body.imageUrl) {
-                postData.featuredImage = req.body.imageUrl;
+            // Combine post data
+            const postData = {
+                ...req.body,
+                featuredImage
+            };
+            
+            // Parse tags if they come as a string
+            if (typeof postData.tags === 'string') {
+                try {
+                    postData.tags = JSON.parse(postData.tags);
+                } catch (e) {
+                    // If parsing fails, split by comma
+                    postData.tags = postData.tags.split(',').map((tag:any) => tag.trim());
+                }
             }
             
             const post = await this.blogPostService.createPost(userId, postData);
@@ -100,11 +114,24 @@ export class BlogPostController {
     updatePost = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const { id } = req.params;
-            const postData = req.body;
             
-            // Si une URL d'image est fournie dans le body (issue de l'upload)
-            if (req.body.imageUrl) {
-                postData.featuredImage = req.body.imageUrl;
+            // Handle file upload (if any)
+            const featuredImage = req.file ? req.file.path : undefined;
+            
+            // Combine post data
+            const postData = {
+                ...req.body,
+                ...(featuredImage && { featuredImage })
+            };
+            
+            // Parse tags if they come as a string
+            if (typeof postData.tags === 'string') {
+                try {
+                    postData.tags = JSON.parse(postData.tags);
+                } catch (e) {
+                    // If parsing fails, split by comma
+                    postData.tags = postData.tags.split(',').map((tag:any) => tag.trim());
+                }
             }
             
             const post = await this.blogPostService.updatePost(id, postData);
@@ -122,6 +149,7 @@ export class BlogPostController {
     deletePost = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const { id } = req.params;
+            
             await this.blogPostService.deletePost(id);
             
             res.status(200).json({
@@ -136,7 +164,11 @@ export class BlogPostController {
     publishPost = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const { id } = req.params;
-            const userId = req.user?.id || 'system';
+            const userId = req.user?.id;
+            
+            if (!userId) {
+                throw new AppError('Authentication required', 401);
+            }
             
             const post = await this.blogPostService.publishPost(id, userId);
             
@@ -153,6 +185,7 @@ export class BlogPostController {
     archivePost = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const { id } = req.params;
+            
             const post = await this.blogPostService.archivePost(id);
             
             res.status(200).json({

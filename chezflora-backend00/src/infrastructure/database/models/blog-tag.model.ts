@@ -33,4 +33,5 @@ export default class BlogTag extends Model {
 
     @BelongsToMany(() => BlogPost, () => BlogPostTag)
     posts!: BlogPost[];
+    
 }

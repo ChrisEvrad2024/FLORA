@@ -9,19 +9,20 @@ export class BlogCommentController {
     getCommentsByPostId = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const { postId } = req.params;
-            const status = req.query.status as string;
             const page = parseInt(req.query.page as string) || 1;
             const limit = parseInt(req.query.limit as string) || 10;
+            const status = req.query.status as string || 'approved';
             
-            const { comments, total, totalPages } = await this.blogCommentService.getCommentsByPostId(postId, {
+            const { comments, total } = await this.blogCommentService.getCommentsByPostId(postId, {
                 status,
                 page,
                 limit
             });
             
+            const totalPages = Math.ceil(total / limit);
+            
             res.status(200).json({
                 success: true,
-                message: 'Comments retrieved successfully',
                 data: comments,
                 pagination: {
                     current: page,
@@ -44,6 +45,7 @@ export class BlogCommentController {
             }
             
             const commentData = req.body;
+            
             const comment = await this.blogCommentService.createComment(userId, commentData);
             
             res.status(201).json({
@@ -59,7 +61,11 @@ export class BlogCommentController {
     approveComment = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const { id } = req.params;
-            const userId = req.user?.id || 'system';
+            const userId = req.user?.id;
+            
+            if (!userId) {
+                throw new AppError('Authentication required', 401);
+            }
             
             const comment = await this.blogCommentService.approveComment(id, userId);
             
@@ -76,6 +82,7 @@ export class BlogCommentController {
     rejectComment = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const { id } = req.params;
+            
             const comment = await this.blogCommentService.rejectComment(id);
             
             res.status(200).json({
@@ -91,6 +98,7 @@ export class BlogCommentController {
     deleteComment = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const { id } = req.params;
+            
             await this.blogCommentService.deleteComment(id);
             
             res.status(200).json({

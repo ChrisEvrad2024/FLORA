@@ -2573,3 +2573,334 @@
 {"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 07:35:45"}
 {"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 07:35:45"}
 {"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 07:35:45"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:27:41"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:27:41"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:27:41"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:27:41"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:27:41"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:27:41"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:28:11"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:28:11"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:28:11"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:28:11"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:28:11"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:28:11"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:28:39"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:28:39"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:28:39"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:28:39"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:28:39"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:28:39"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:29:02"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:29:02"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:29:02"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:29:02"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:29:02"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:29:02"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:30:11"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:30:11"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:30:11"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:30:11"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:30:11"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:30:11"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:31:03"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:31:03"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:31:03"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:31:03"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:31:03"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:31:03"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:31:40"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:31:40"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:31:40"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:31:40"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:31:40"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:31:40"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:32:50"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:32:50"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:32:50"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:32:50"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:32:50"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:32:50"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:33:56"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:33:56"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:33:56"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:33:56"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:33:56"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:33:56"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:34:23"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:34:23"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:34:23"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:34:23"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:34:23"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:34:23"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:34:51"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:34:51"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:34:51"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:34:51"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:34:51"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:34:51"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:35:30"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:35:30"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:35:30"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:35:30"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:35:30"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:35:30"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:36:05"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:36:05"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:36:05"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:36:05"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:36:05"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:36:05"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:37:15"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:37:15"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:37:15"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:37:15"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:37:15"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:37:15"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:38:11"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:38:11"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:38:11"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:38:11"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:38:11"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:38:11"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:38:59"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:38:59"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:38:59"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:38:59"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:38:59"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:38:59"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:39:36"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:39:36"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:39:36"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:39:36"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:39:36"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:39:36"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:39:57"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:39:57"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:39:57"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:39:57"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:39:57"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:39:57"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:41:10"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:41:10"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:41:10"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:41:10"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:41:10"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:41:10"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:41:52"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:41:52"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:41:52"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:41:52"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:41:52"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:41:52"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:42:17"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:42:17"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:42:17"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:42:17"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:42:17"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:42:17"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:42:54"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:42:54"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:42:54"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:42:54"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:42:54"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:42:54"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:48:41"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:48:41"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:48:41"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:48:41"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:48:41"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:48:41"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:49:01"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:49:01"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:49:01"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:49:01"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:49:01"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:49:01"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:50:43"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:50:43"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:50:43"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:50:43"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:50:43"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:50:43"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:51:32"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:51:32"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:51:32"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:51:32"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:51:32"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:51:32"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:53:26"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:53:26"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:53:26"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:53:26"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:53:26"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:53:26"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:53:45"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:53:45"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:54:05"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:54:05"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:54:05"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:54:05"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:54:05"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:54:05"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:54:29"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:54:29"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:54:29"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:54:29"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:54:29"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:54:29"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:54:55"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:54:55"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:54:55"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:54:55"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:54:55"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:54:55"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:55:51"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 10:55:51"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:55:51"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:55:51"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 10:55:51"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 10:55:51"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `first_name` AS `firstName`, `last_name` AS `lastName`, `email`, `password`, `phone`, `role`, `status`, `last_login` AS `lastLogin`, `reset_password_token` AS `resetPasswordToken`, `reset_password_expires` AS `resetPasswordExpires`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `users` AS `User` WHERE `User`.`email` = 'omgbaa@gmail.com';","timestamp":"2025-03-22 10:58:17"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `first_name` AS `firstName`, `last_name` AS `lastName`, `email`, `password`, `phone`, `role`, `status`, `last_login` AS `lastLogin`, `reset_password_token` AS `resetPasswordToken`, `reset_password_expires` AS `resetPasswordExpires`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `users` AS `User` WHERE `User`.`id` = '74380d98-06e3-11f0-9b48-283a4d45aa58';","timestamp":"2025-03-22 10:58:17"}
+{"level":"debug","message":"Executing (default): UPDATE `users` SET `last_login`=?,`updated_at`=? WHERE `id` = ?","timestamp":"2025-03-22 10:58:17"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `name`, `description`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_categories` AS `BlogCategory` WHERE `BlogCategory`.`slug` = 'fleurs-d\\'ete' LIMIT 1;","timestamp":"2025-03-22 10:58:46"}
+{"level":"debug","message":"Executing (default): INSERT INTO `blog_categories` (`id`,`name`,`description`,`slug`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?);","timestamp":"2025-03-22 10:58:46"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `name`, `description`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_categories` AS `BlogCategory` WHERE `BlogCategory`.`slug` = 'fleurs-d\\'hiver' LIMIT 1;","timestamp":"2025-03-22 10:59:29"}
+{"level":"debug","message":"Executing (default): INSERT INTO `blog_categories` (`id`,`name`,`description`,`slug`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?);","timestamp":"2025-03-22 10:59:29"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `name`, `description`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_categories` AS `BlogCategory` WHERE `BlogCategory`.`slug` = 'fleurs-d\\'automne' LIMIT 1;","timestamp":"2025-03-22 10:59:37"}
+{"level":"debug","message":"Executing (default): INSERT INTO `blog_categories` (`id`,`name`,`description`,`slug`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?);","timestamp":"2025-03-22 10:59:37"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `name`, `description`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_categories` AS `BlogCategory` WHERE `BlogCategory`.`slug` = 'fleurs-de-printemps' LIMIT 1;","timestamp":"2025-03-22 10:59:50"}
+{"level":"debug","message":"Executing (default): INSERT INTO `blog_categories` (`id`,`name`,`description`,`slug`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?);","timestamp":"2025-03-22 10:59:50"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `name`, `description`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_categories` AS `BlogCategory` ORDER BY `BlogCategory`.`name` ASC;","timestamp":"2025-03-22 10:59:59"}
+{"level":"debug","message":"Executing (default): SELECT count(*) AS `count` FROM `blog_posts` AS `BlogPost` WHERE `BlogPost`.`status` = 'published' AND `BlogPost`.`category_id` = 'a4782c4a-fe57-41fa-b00a-6bb3a84c854a';","timestamp":"2025-03-22 10:59:59"}
+{"level":"debug","message":"Executing (default): SELECT count(*) AS `count` FROM `blog_posts` AS `BlogPost` WHERE `BlogPost`.`status` = 'published' AND `BlogPost`.`category_id` = 'bcd683d7-4aa6-475b-99d8-3acbc9c87c86';","timestamp":"2025-03-22 10:59:59"}
+{"level":"debug","message":"Executing (default): SELECT count(*) AS `count` FROM `blog_posts` AS `BlogPost` WHERE `BlogPost`.`status` = 'published' AND `BlogPost`.`category_id` = '6d018520-0c02-4c84-9313-9341decdeca6';","timestamp":"2025-03-22 10:59:59"}
+{"level":"debug","message":"Executing (default): SELECT count(*) AS `count` FROM `blog_posts` AS `BlogPost` WHERE `BlogPost`.`status` = 'published' AND `BlogPost`.`category_id` = '500bf163-3be6-4eee-ae8c-f258f3ec7a2c';","timestamp":"2025-03-22 10:59:59"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `name`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_tags` AS `BlogTag` WHERE `BlogTag`.`slug` = 'entretien';","timestamp":"2025-03-22 11:01:33"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 11:03:36"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 11:03:36"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 11:03:36"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 11:03:36"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 11:03:36"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 11:03:36"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 11:04:38"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 11:04:38"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 11:04:38"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 11:04:38"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 11:04:38"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 11:04:38"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `name`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_tags` AS `BlogTag` WHERE `BlogTag`.`slug` = 'entretien';","timestamp":"2025-03-22 11:05:59"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `name`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_tags` AS `BlogTag` WHERE `BlogTag`.`slug` = 'jardinage';","timestamp":"2025-03-22 11:10:02"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `name`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_tags` AS `BlogTag` WHERE `BlogTag`.`slug` = 'jardinage';","timestamp":"2025-03-22 11:11:13"}
+{"level":"debug","message":"Executing (default): INSERT INTO `blog_tags` (`id`,`name`,`slug`,`created_at`,`updated_at`) VALUES (?,?,?,?,?);","timestamp":"2025-03-22 11:11:13"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `name`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_tags` AS `BlogTag` WHERE `BlogTag`.`slug` = 'entretien';","timestamp":"2025-03-22 11:11:28"}
+{"level":"debug","message":"Executing (default): INSERT INTO `blog_tags` (`id`,`name`,`slug`,`created_at`,`updated_at`) VALUES (?,?,?,?,?);","timestamp":"2025-03-22 11:11:28"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `name`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_tags` AS `BlogTag` WHERE `BlogTag`.`slug` = 'ecologie';","timestamp":"2025-03-22 11:11:36"}
+{"level":"debug","message":"Executing (default): INSERT INTO `blog_tags` (`id`,`name`,`slug`,`created_at`,`updated_at`) VALUES (?,?,?,?,?);","timestamp":"2025-03-22 11:11:36"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `name`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_tags` AS `BlogTag` WHERE `BlogTag`.`slug` = 'paix';","timestamp":"2025-03-22 11:11:44"}
+{"level":"debug","message":"Executing (default): INSERT INTO `blog_tags` (`id`,`name`,`slug`,`created_at`,`updated_at`) VALUES (?,?,?,?,?);","timestamp":"2025-03-22 11:11:44"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `name`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_tags` AS `BlogTag` ORDER BY `BlogTag`.`name` ASC;","timestamp":"2025-03-22 11:11:57"}
+{"level":"debug","message":"Executing (default): SELECT count(*) AS `count` FROM `blog_post_tags` AS `BlogPostTag` WHERE `BlogPostTag`.`tag_id` = 'a236e34d-32e9-4c31-a8f6-086de9e4c4d1';","timestamp":"2025-03-22 11:11:57"}
+{"level":"debug","message":"Executing (default): SELECT count(*) AS `count` FROM `blog_post_tags` AS `BlogPostTag` WHERE `BlogPostTag`.`tag_id` = '59ae97ce-62da-4d07-811c-d6b16cb39f69';","timestamp":"2025-03-22 11:11:57"}
+{"level":"debug","message":"Executing (default): SELECT count(*) AS `count` FROM `blog_post_tags` AS `BlogPostTag` WHERE `BlogPostTag`.`tag_id` = '06b6897e-c065-4cdc-9952-f0856d1b6d77';","timestamp":"2025-03-22 11:11:58"}
+{"level":"debug","message":"Executing (default): SELECT count(*) AS `count` FROM `blog_post_tags` AS `BlogPostTag` WHERE `BlogPostTag`.`tag_id` = '8a01fe24-2a92-4794-aabc-61d7b22cc032';","timestamp":"2025-03-22 11:11:58"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 11:23:02"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 11:23:02"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 11:23:02"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 11:23:02"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 11:23:02"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 11:23:02"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 11:23:40"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 11:23:40"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 11:23:40"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 11:23:40"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 11:23:40"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 11:23:40"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 11:40:48"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 11:40:48"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 11:40:48"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 11:40:48"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 11:40:48"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 11:40:48"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `first_name` AS `firstName`, `last_name` AS `lastName`, `email`, `password`, `phone`, `role`, `status`, `last_login` AS `lastLogin`, `reset_password_token` AS `resetPasswordToken`, `reset_password_expires` AS `resetPasswordExpires`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `users` AS `User` WHERE `User`.`email` = 'omgbaa@gmail.com';","timestamp":"2025-03-22 11:42:17"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `first_name` AS `firstName`, `last_name` AS `lastName`, `email`, `password`, `phone`, `role`, `status`, `last_login` AS `lastLogin`, `reset_password_token` AS `resetPasswordToken`, `reset_password_expires` AS `resetPasswordExpires`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `users` AS `User` WHERE `User`.`id` = '3bf2926d-070a-11f0-9b48-283a4d45aa58';","timestamp":"2025-03-22 11:42:17"}
+{"level":"debug","message":"Executing (default): UPDATE `users` SET `last_login`=?,`updated_at`=? WHERE `id` = ?","timestamp":"2025-03-22 11:42:17"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `name`, `description`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_categories` AS `BlogCategory` WHERE `BlogCategory`.`slug` = 'fleurs-d\\'ete' LIMIT 1;","timestamp":"2025-03-22 11:42:56"}
+{"level":"debug","message":"Executing (default): INSERT INTO `blog_categories` (`id`,`name`,`description`,`slug`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?);","timestamp":"2025-03-22 11:42:56"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `name`, `description`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_categories` AS `BlogCategory` WHERE `BlogCategory`.`slug` = 'fleurs-d\\'hiver' LIMIT 1;","timestamp":"2025-03-22 11:43:03"}
+{"level":"debug","message":"Executing (default): INSERT INTO `blog_categories` (`id`,`name`,`description`,`slug`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?);","timestamp":"2025-03-22 11:43:03"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `name`, `description`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_categories` AS `BlogCategory` WHERE `BlogCategory`.`slug` = 'fleurs-d\\'automne' LIMIT 1;","timestamp":"2025-03-22 11:43:11"}
+{"level":"debug","message":"Executing (default): INSERT INTO `blog_categories` (`id`,`name`,`description`,`slug`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?);","timestamp":"2025-03-22 11:43:11"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `name`, `description`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_categories` AS `BlogCategory` WHERE `BlogCategory`.`slug` = 'fleurs-de-printemps' LIMIT 1;","timestamp":"2025-03-22 11:43:20"}
+{"level":"debug","message":"Executing (default): INSERT INTO `blog_categories` (`id`,`name`,`description`,`slug`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?);","timestamp":"2025-03-22 11:43:20"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `name`, `description`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_categories` AS `BlogCategory` ORDER BY `BlogCategory`.`name` ASC;","timestamp":"2025-03-22 11:43:36"}
+{"level":"debug","message":"Executing (default): SELECT count(*) AS `count` FROM `blog_posts` AS `BlogPost` WHERE `BlogPost`.`status` = 'published' AND `BlogPost`.`category_id` = 'e826762e-9dc6-4e41-a8cd-d770c7e29e01';","timestamp":"2025-03-22 11:43:36"}
+{"level":"debug","message":"Executing (default): SELECT count(*) AS `count` FROM `blog_posts` AS `BlogPost` WHERE `BlogPost`.`status` = 'published' AND `BlogPost`.`category_id` = '04978264-361e-4c44-a820-90ae5fd5c200';","timestamp":"2025-03-22 11:43:36"}
+{"level":"debug","message":"Executing (default): SELECT count(*) AS `count` FROM `blog_posts` AS `BlogPost` WHERE `BlogPost`.`status` = 'published' AND `BlogPost`.`category_id` = 'c240d40d-88c4-4297-97eb-e920d6b9464a';","timestamp":"2025-03-22 11:43:36"}
+{"level":"debug","message":"Executing (default): SELECT count(*) AS `count` FROM `blog_posts` AS `BlogPost` WHERE `BlogPost`.`status` = 'published' AND `BlogPost`.`category_id` = 'e6c1100a-44da-458b-b525-9b436133b509';","timestamp":"2025-03-22 11:43:36"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `name`, `description`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_categories` AS `BlogCategory` WHERE `BlogCategory`.`id` = 'e826762e-9dc6-4e41-a8cd-d770c7e29e01';","timestamp":"2025-03-22 11:44:11"}
+{"level":"debug","message":"Executing (default): SELECT count(*) AS `count` FROM `blog_posts` AS `BlogPost` WHERE `BlogPost`.`status` = 'published' AND `BlogPost`.`category_id` = 'e826762e-9dc6-4e41-a8cd-d770c7e29e01';","timestamp":"2025-03-22 11:44:11"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `name`, `description`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_categories` AS `BlogCategory` WHERE `BlogCategory`.`slug` = 'fleurs-de-printemps-et-ete' LIMIT 1;","timestamp":"2025-03-22 11:44:34"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `name`, `description`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_categories` AS `BlogCategory` WHERE `BlogCategory`.`id` = 'e826762e-9dc6-4e41-a8cd-d770c7e29e01';","timestamp":"2025-03-22 11:44:34"}
+{"level":"debug","message":"Executing (default): UPDATE `blog_categories` SET `name`=?,`description`=?,`slug`=?,`updated_at`=? WHERE `id` = ?","timestamp":"2025-03-22 11:44:34"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `name`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_tags` AS `BlogTag` WHERE `BlogTag`.`slug` = 'entretien';","timestamp":"2025-03-22 11:45:21"}
+{"level":"debug","message":"Executing (default): INSERT INTO `blog_tags` (`id`,`name`,`slug`,`created_at`,`updated_at`) VALUES (?,?,?,?,?);","timestamp":"2025-03-22 11:45:21"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `name`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_tags` AS `BlogTag` WHERE `BlogTag`.`slug` = 'jardinage';","timestamp":"2025-03-22 11:45:29"}
+{"level":"debug","message":"Executing (default): INSERT INTO `blog_tags` (`id`,`name`,`slug`,`created_at`,`updated_at`) VALUES (?,?,?,?,?);","timestamp":"2025-03-22 11:45:29"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `name`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_tags` AS `BlogTag` WHERE `BlogTag`.`slug` = 'zen';","timestamp":"2025-03-22 11:45:33"}
+{"level":"debug","message":"Executing (default): INSERT INTO `blog_tags` (`id`,`name`,`slug`,`created_at`,`updated_at`) VALUES (?,?,?,?,?);","timestamp":"2025-03-22 11:45:33"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `name`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_tags` AS `BlogTag` WHERE `BlogTag`.`slug` = 'paix';","timestamp":"2025-03-22 11:45:42"}
+{"level":"debug","message":"Executing (default): INSERT INTO `blog_tags` (`id`,`name`,`slug`,`created_at`,`updated_at`) VALUES (?,?,?,?,?);","timestamp":"2025-03-22 11:45:42"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `name`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_tags` AS `BlogTag` WHERE `BlogTag`.`slug` = 'harmonie';","timestamp":"2025-03-22 11:45:49"}
+{"level":"debug","message":"Executing (default): INSERT INTO `blog_tags` (`id`,`name`,`slug`,`created_at`,`updated_at`) VALUES (?,?,?,?,?);","timestamp":"2025-03-22 11:45:49"}
+{"level":"debug","message":"Executing (default): SELECT `BlogPost`.`id`, `BlogPost`.`author_id` AS `authorId`, `BlogPost`.`category_id` AS `categoryId`, `BlogPost`.`title`, `BlogPost`.`slug`, `BlogPost`.`content`, `BlogPost`.`excerpt`, `BlogPost`.`featured_image` AS `featuredImage`, `BlogPost`.`status`, `BlogPost`.`published_at` AS `publishedAt`, `BlogPost`.`created_at` AS `createdAt`, `BlogPost`.`updated_at` AS `updatedAt`, `author`.`id` AS `author.id`, `author`.`first_name` AS `author.firstName`, `author`.`last_name` AS `author.lastName`, `author`.`email` AS `author.email`, `category`.`id` AS `category.id`, `category`.`name` AS `category.name` FROM `blog_posts` AS `BlogPost` LEFT OUTER JOIN `users` AS `author` ON `BlogPost`.`author_id` = `author`.`id` LEFT OUTER JOIN `blog_categories` AS `category` ON `BlogPost`.`category_id` = `category`.`id` WHERE `BlogPost`.`slug` = 'comment-prendre-soin-des-roses-en-ete';","timestamp":"2025-03-22 11:47:21"}
+{"level":"debug","message":"Executing (default): INSERT INTO `blog_posts` (`id`,`author_id`,`category_id`,`title`,`slug`,`content`,`excerpt`,`status`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?,?,?,?,?);","timestamp":"2025-03-22 11:47:21"}
+{"level":"debug","message":"Executing (default): SELECT `BlogPost`.`id`, `BlogPost`.`author_id` AS `authorId`, `BlogPost`.`category_id` AS `categoryId`, `BlogPost`.`title`, `BlogPost`.`slug`, `BlogPost`.`content`, `BlogPost`.`excerpt`, `BlogPost`.`featured_image` AS `featuredImage`, `BlogPost`.`status`, `BlogPost`.`published_at` AS `publishedAt`, `BlogPost`.`created_at` AS `createdAt`, `BlogPost`.`updated_at` AS `updatedAt`, `author`.`id` AS `author.id`, `author`.`first_name` AS `author.firstName`, `author`.`last_name` AS `author.lastName`, `author`.`email` AS `author.email`, `category`.`id` AS `category.id`, `category`.`name` AS `category.name` FROM `blog_posts` AS `BlogPost` LEFT OUTER JOIN `users` AS `author` ON `BlogPost`.`author_id` = `author`.`id` LEFT OUTER JOIN `blog_categories` AS `category` ON `BlogPost`.`category_id` = `category`.`id` WHERE `BlogPost`.`slug` = 'comment-prendre-soin-des-roses-en-ete';","timestamp":"2025-03-22 11:48:21"}
+{"level":"debug","message":"Executing (default): INSERT INTO `blog_posts` (`id`,`author_id`,`category_id`,`title`,`slug`,`content`,`excerpt`,`status`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?,?,?,?,?);","timestamp":"2025-03-22 11:48:21"}
+{"level":"debug","message":"Executing (default): SELECT `BlogPost`.`id`, `BlogPost`.`author_id` AS `authorId`, `BlogPost`.`category_id` AS `categoryId`, `BlogPost`.`title`, `BlogPost`.`slug`, `BlogPost`.`content`, `BlogPost`.`excerpt`, `BlogPost`.`featured_image` AS `featuredImage`, `BlogPost`.`status`, `BlogPost`.`published_at` AS `publishedAt`, `BlogPost`.`created_at` AS `createdAt`, `BlogPost`.`updated_at` AS `updatedAt`, `author`.`id` AS `author.id`, `author`.`first_name` AS `author.firstName`, `author`.`last_name` AS `author.lastName`, `author`.`email` AS `author.email`, `category`.`id` AS `category.id`, `category`.`name` AS `category.name` FROM `blog_posts` AS `BlogPost` LEFT OUTER JOIN `users` AS `author` ON `BlogPost`.`author_id` = `author`.`id` LEFT OUTER JOIN `blog_categories` AS `category` ON `BlogPost`.`category_id` = `category`.`id` WHERE `BlogPost`.`id` = 'c19f89b1-a65e-41cc-9645-4cfeb2583d54';","timestamp":"2025-03-22 11:48:21"}
+{"level":"debug","message":"Executing (b3b1453d-411b-4645-813a-20a77b3c2ec5): START TRANSACTION;","timestamp":"2025-03-22 11:48:21"}
+{"level":"debug","message":"Executing (b3b1453d-411b-4645-813a-20a77b3c2ec5): SELECT `id`, `name`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_tags` AS `BlogTag` WHERE (`BlogTag`.`name` = '9382ba44-728f-4014-90ee-2b7892e6ce0d' OR `BlogTag`.`slug` = '9382ba44-728f-4014-90ee-2b7892e6ce0d') LIMIT 1;","timestamp":"2025-03-22 11:48:21"}
+{"level":"debug","message":"Executing (b3b1453d-411b-4645-813a-20a77b3c2ec5): INSERT INTO `blog_tags` (`id`,`name`,`slug`,`created_at`,`updated_at`) VALUES (?,?,?,?,?);","timestamp":"2025-03-22 11:48:21"}
+{"level":"debug","message":"Executing (9c48dd48-e26a-473c-b933-0d2ab97e22ce): START TRANSACTION;","timestamp":"2025-03-22 11:48:21"}
+{"level":"debug","message":"Executing (b3b1453d-411b-4645-813a-20a77b3c2ec5): COMMIT;","timestamp":"2025-03-22 11:48:21"}
+{"level":"debug","message":"Executing (9c48dd48-e26a-473c-b933-0d2ab97e22ce): SELECT `id`, `name`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_tags` AS `BlogTag` WHERE (`BlogTag`.`name` = '9382ba44-728f-4014-90ee-2b7892e6ce0d' OR `BlogTag`.`slug` = '9382ba44-728f-4014-90ee-2b7892e6ce0d') LIMIT 1;","timestamp":"2025-03-22 11:48:21"}
+{"level":"debug","message":"Executing (9c48dd48-e26a-473c-b933-0d2ab97e22ce): COMMIT;","timestamp":"2025-03-22 11:48:21"}
+{"level":"debug","message":"Executing (default): DELETE FROM `blog_post_tags` WHERE `post_id` = 'c19f89b1-a65e-41cc-9645-4cfeb2583d54'","timestamp":"2025-03-22 11:48:21"}
+{"level":"debug","message":"Executing (default): INSERT INTO `blog_post_tags` (`id`,`post_id`,`tag_id`,`created_at`,`updated_at`) VALUES (?,?,?,?,?);","timestamp":"2025-03-22 11:48:21"}
+{"level":"debug","message":"Executing (default): SELECT `BlogPost`.`id`, `BlogPost`.`author_id` AS `authorId`, `BlogPost`.`category_id` AS `categoryId`, `BlogPost`.`title`, `BlogPost`.`slug`, `BlogPost`.`content`, `BlogPost`.`excerpt`, `BlogPost`.`featured_image` AS `featuredImage`, `BlogPost`.`status`, `BlogPost`.`published_at` AS `publishedAt`, `BlogPost`.`created_at` AS `createdAt`, `BlogPost`.`updated_at` AS `updatedAt`, `author`.`id` AS `author.id`, `author`.`first_name` AS `author.firstName`, `author`.`last_name` AS `author.lastName`, `author`.`email` AS `author.email`, `category`.`id` AS `category.id`, `category`.`name` AS `category.name` FROM `blog_posts` AS `BlogPost` LEFT OUTER JOIN `users` AS `author` ON `BlogPost`.`author_id` = `author`.`id` LEFT OUTER JOIN `blog_categories` AS `category` ON `BlogPost`.`category_id` = `category`.`id` WHERE `BlogPost`.`id` = 'c19f89b1-a65e-41cc-9645-4cfeb2583d54';","timestamp":"2025-03-22 11:48:21"}
+{"level":"debug","message":"Executing (default): SELECT count(*) AS `count` FROM `blog_comments` AS `BlogComment` WHERE `BlogComment`.`status` = 'approved' AND `BlogComment`.`post_id` = 'c19f89b1-a65e-41cc-9645-4cfeb2583d54';","timestamp":"2025-03-22 11:48:21"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `name`, `description`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_categories` AS `BlogCategory` ORDER BY `BlogCategory`.`name` ASC;","timestamp":"2025-03-22 11:50:00"}
+{"level":"debug","message":"Executing (default): SELECT count(*) AS `count` FROM `blog_posts` AS `BlogPost` WHERE `BlogPost`.`status` = 'published' AND `BlogPost`.`category_id` = '04978264-361e-4c44-a820-90ae5fd5c200';","timestamp":"2025-03-22 11:50:00"}
+{"level":"debug","message":"Executing (default): SELECT count(*) AS `count` FROM `blog_posts` AS `BlogPost` WHERE `BlogPost`.`status` = 'published' AND `BlogPost`.`category_id` = 'c240d40d-88c4-4297-97eb-e920d6b9464a';","timestamp":"2025-03-22 11:50:00"}
+{"level":"debug","message":"Executing (default): SELECT count(*) AS `count` FROM `blog_posts` AS `BlogPost` WHERE `BlogPost`.`status` = 'published' AND `BlogPost`.`category_id` = 'e6c1100a-44da-458b-b525-9b436133b509';","timestamp":"2025-03-22 11:50:00"}
+{"level":"debug","message":"Executing (default): SELECT count(*) AS `count` FROM `blog_posts` AS `BlogPost` WHERE `BlogPost`.`status` = 'published' AND `BlogPost`.`category_id` = 'e826762e-9dc6-4e41-a8cd-d770c7e29e01';","timestamp":"2025-03-22 11:50:00"}
+{"level":"debug","message":"Executing (default): SELECT `BlogPost`.`id`, `BlogPost`.`author_id` AS `authorId`, `BlogPost`.`category_id` AS `categoryId`, `BlogPost`.`title`, `BlogPost`.`slug`, `BlogPost`.`content`, `BlogPost`.`excerpt`, `BlogPost`.`featured_image` AS `featuredImage`, `BlogPost`.`status`, `BlogPost`.`published_at` AS `publishedAt`, `BlogPost`.`created_at` AS `createdAt`, `BlogPost`.`updated_at` AS `updatedAt`, `author`.`id` AS `author.id`, `author`.`first_name` AS `author.firstName`, `author`.`last_name` AS `author.lastName`, `author`.`email` AS `author.email`, `category`.`id` AS `category.id`, `category`.`name` AS `category.name` FROM `blog_posts` AS `BlogPost` LEFT OUTER JOIN `users` AS `author` ON `BlogPost`.`author_id` = `author`.`id` LEFT OUTER JOIN `blog_categories` AS `category` ON `BlogPost`.`category_id` = `category`.`id` WHERE `BlogPost`.`slug` = 'comment-prendre-soin-des-roses-en-ete';","timestamp":"2025-03-22 11:50:53"}
+{"level":"debug","message":"Executing (default): SELECT count(*) AS `count` FROM `blog_comments` AS `BlogComment` WHERE `BlogComment`.`status` = 'approved' AND `BlogComment`.`post_id` = 'c19f89b1-a65e-41cc-9645-4cfeb2583d54';","timestamp":"2025-03-22 11:50:53"}
+{"level":"debug","message":"Executing (default): INSERT INTO blog_post_views (post_id, view_count, created_at, updated_at)\n                VALUES ('c19f89b1-a65e-41cc-9645-4cfeb2583d54', 1, NOW(), NOW())\n                ON DUPLICATE KEY UPDATE\n                    view_count = view_count + 1,\n                    updated_at = NOW()","timestamp":"2025-03-22 11:50:53"}
+{"level":"debug","message":"Executing (default): SELECT `BlogPost`.`id`, `BlogPost`.`author_id` AS `authorId`, `BlogPost`.`category_id` AS `categoryId`, `BlogPost`.`title`, `BlogPost`.`slug`, `BlogPost`.`content`, `BlogPost`.`excerpt`, `BlogPost`.`featured_image` AS `featuredImage`, `BlogPost`.`status`, `BlogPost`.`published_at` AS `publishedAt`, `BlogPost`.`created_at` AS `createdAt`, `BlogPost`.`updated_at` AS `updatedAt`, `author`.`id` AS `author.id`, `author`.`first_name` AS `author.firstName`, `author`.`last_name` AS `author.lastName`, `author`.`email` AS `author.email`, `category`.`id` AS `category.id`, `category`.`name` AS `category.name` FROM `blog_posts` AS `BlogPost` LEFT OUTER JOIN `users` AS `author` ON `BlogPost`.`author_id` = `author`.`id` LEFT OUTER JOIN `blog_categories` AS `category` ON `BlogPost`.`category_id` = `category`.`id` WHERE `BlogPost`.`slug` = 'comment-prendre-soin-des-roses-en-ete';","timestamp":"2025-03-22 11:52:29"}
+{"level":"debug","message":"Executing (default): SELECT count(*) AS `count` FROM `blog_comments` AS `BlogComment` WHERE `BlogComment`.`status` = 'approved' AND `BlogComment`.`post_id` = 'c19f89b1-a65e-41cc-9645-4cfeb2583d54';","timestamp":"2025-03-22 11:52:29"}
+{"level":"debug","message":"Executing (default): INSERT INTO blog_post_views (post_id, view_count, created_at, updated_at)\n                VALUES ('c19f89b1-a65e-41cc-9645-4cfeb2583d54', 1, NOW(), NOW())\n                ON DUPLICATE KEY UPDATE\n                    view_count = view_count + 1,\n                    updated_at = NOW()","timestamp":"2025-03-22 11:52:29"}
+{"level":"debug","message":"Executing (default): SELECT `BlogPost`.`id`, `BlogPost`.`author_id` AS `authorId`, `BlogPost`.`category_id` AS `categoryId`, `BlogPost`.`title`, `BlogPost`.`slug`, `BlogPost`.`content`, `BlogPost`.`excerpt`, `BlogPost`.`featured_image` AS `featuredImage`, `BlogPost`.`status`, `BlogPost`.`published_at` AS `publishedAt`, `BlogPost`.`created_at` AS `createdAt`, `BlogPost`.`updated_at` AS `updatedAt`, `author`.`id` AS `author.id`, `author`.`first_name` AS `author.firstName`, `author`.`last_name` AS `author.lastName`, `author`.`email` AS `author.email`, `category`.`id` AS `category.id`, `category`.`name` AS `category.name` FROM `blog_posts` AS `BlogPost` LEFT OUTER JOIN `users` AS `author` ON `BlogPost`.`author_id` = `author`.`id` LEFT OUTER JOIN `blog_categories` AS `category` ON `BlogPost`.`category_id` = `category`.`id` WHERE `BlogPost`.`slug` = 'comment-prendre-soin-des-roses-en-ete';","timestamp":"2025-03-22 11:52:34"}
+{"level":"debug","message":"Executing (default): SELECT count(*) AS `count` FROM `blog_comments` AS `BlogComment` WHERE `BlogComment`.`status` = 'approved' AND `BlogComment`.`post_id` = 'c19f89b1-a65e-41cc-9645-4cfeb2583d54';","timestamp":"2025-03-22 11:52:34"}
+{"level":"debug","message":"Executing (default): INSERT INTO blog_post_views (post_id, view_count, created_at, updated_at)\n                VALUES ('c19f89b1-a65e-41cc-9645-4cfeb2583d54', 1, NOW(), NOW())\n                ON DUPLICATE KEY UPDATE\n                    view_count = view_count + 1,\n                    updated_at = NOW()","timestamp":"2025-03-22 11:52:34"}
+{"level":"debug","message":"Executing (default): SELECT `BlogPost`.`id`, `BlogPost`.`author_id` AS `authorId`, `BlogPost`.`category_id` AS `categoryId`, `BlogPost`.`title`, `BlogPost`.`slug`, `BlogPost`.`content`, `BlogPost`.`excerpt`, `BlogPost`.`featured_image` AS `featuredImage`, `BlogPost`.`status`, `BlogPost`.`published_at` AS `publishedAt`, `BlogPost`.`created_at` AS `createdAt`, `BlogPost`.`updated_at` AS `updatedAt`, `author`.`id` AS `author.id`, `author`.`first_name` AS `author.firstName`, `author`.`last_name` AS `author.lastName`, `author`.`email` AS `author.email`, `category`.`id` AS `category.id`, `category`.`name` AS `category.name` FROM `blog_posts` AS `BlogPost` LEFT OUTER JOIN `users` AS `author` ON `BlogPost`.`author_id` = `author`.`id` LEFT OUTER JOIN `blog_categories` AS `category` ON `BlogPost`.`category_id` = `category`.`id` WHERE `BlogPost`.`slug` = 'ceci-est-un-post-de-blog-frere';","timestamp":"2025-03-22 11:56:44"}
+{"level":"debug","message":"Executing (default): SELECT `BlogPost`.`id`, `BlogPost`.`author_id` AS `authorId`, `BlogPost`.`category_id` AS `categoryId`, `BlogPost`.`title`, `BlogPost`.`slug`, `BlogPost`.`content`, `BlogPost`.`excerpt`, `BlogPost`.`featured_image` AS `featuredImage`, `BlogPost`.`status`, `BlogPost`.`published_at` AS `publishedAt`, `BlogPost`.`created_at` AS `createdAt`, `BlogPost`.`updated_at` AS `updatedAt`, `author`.`id` AS `author.id`, `author`.`first_name` AS `author.firstName`, `author`.`last_name` AS `author.lastName`, `author`.`email` AS `author.email`, `category`.`id` AS `category.id`, `category`.`name` AS `category.name` FROM `blog_posts` AS `BlogPost` LEFT OUTER JOIN `users` AS `author` ON `BlogPost`.`author_id` = `author`.`id` LEFT OUTER JOIN `blog_categories` AS `category` ON `BlogPost`.`category_id` = `category`.`id` WHERE `BlogPost`.`slug` = 'vie-sur-vous-post';","timestamp":"2025-03-22 11:58:40"}
+{"level":"debug","message":"Executing (default): INSERT INTO `blog_posts` (`id`,`author_id`,`category_id`,`title`,`slug`,`content`,`excerpt`,`status`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?,?,?,?,?);","timestamp":"2025-03-22 11:58:40"}
+{"level":"debug","message":"Executing (default): SELECT `BlogPost`.`id`, `BlogPost`.`author_id` AS `authorId`, `BlogPost`.`category_id` AS `categoryId`, `BlogPost`.`title`, `BlogPost`.`slug`, `BlogPost`.`content`, `BlogPost`.`excerpt`, `BlogPost`.`featured_image` AS `featuredImage`, `BlogPost`.`status`, `BlogPost`.`published_at` AS `publishedAt`, `BlogPost`.`created_at` AS `createdAt`, `BlogPost`.`updated_at` AS `updatedAt`, `author`.`id` AS `author.id`, `author`.`first_name` AS `author.firstName`, `author`.`last_name` AS `author.lastName`, `author`.`email` AS `author.email`, `category`.`id` AS `category.id`, `category`.`name` AS `category.name` FROM `blog_posts` AS `BlogPost` LEFT OUTER JOIN `users` AS `author` ON `BlogPost`.`author_id` = `author`.`id` LEFT OUTER JOIN `blog_categories` AS `category` ON `BlogPost`.`category_id` = `category`.`id` WHERE `BlogPost`.`id` = 'e709e274-d4c9-489e-93f0-81cd2e114ebb';","timestamp":"2025-03-22 11:58:40"}
+{"level":"debug","message":"Executing (6b1d1e81-7ded-4905-ad0f-77058170e3a9): START TRANSACTION;","timestamp":"2025-03-22 11:58:40"}
+{"level":"debug","message":"Executing (6b1d1e81-7ded-4905-ad0f-77058170e3a9): SELECT `id`, `name`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_tags` AS `BlogTag` WHERE (`BlogTag`.`name` = '9382ba44-728f-4014-90ee-2b7892e6ce0d' OR `BlogTag`.`slug` = '9382ba44-728f-4014-90ee-2b7892e6ce0d') LIMIT 1;","timestamp":"2025-03-22 11:58:40"}
+{"level":"debug","message":"Executing (6b1d1e81-7ded-4905-ad0f-77058170e3a9): COMMIT;","timestamp":"2025-03-22 11:58:40"}
+{"level":"debug","message":"Executing (0e8b0a09-d80a-46c1-9e09-1dbe780bab08): START TRANSACTION;","timestamp":"2025-03-22 11:58:40"}
+{"level":"debug","message":"Executing (0e8b0a09-d80a-46c1-9e09-1dbe780bab08): SELECT `id`, `name`, `slug`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `blog_tags` AS `BlogTag` WHERE (`BlogTag`.`name` = '9382ba44-728f-4014-90ee-2b7892e6ce0d' OR `BlogTag`.`slug` = '9382ba44-728f-4014-90ee-2b7892e6ce0d') LIMIT 1;","timestamp":"2025-03-22 11:58:40"}
+{"level":"debug","message":"Executing (0e8b0a09-d80a-46c1-9e09-1dbe780bab08): COMMIT;","timestamp":"2025-03-22 11:58:40"}
+{"level":"debug","message":"Executing (default): DELETE FROM `blog_post_tags` WHERE `post_id` = 'e709e274-d4c9-489e-93f0-81cd2e114ebb'","timestamp":"2025-03-22 11:58:40"}
+{"level":"debug","message":"Executing (default): INSERT INTO `blog_post_tags` (`id`,`post_id`,`tag_id`,`created_at`,`updated_at`) VALUES (?,?,?,?,?);","timestamp":"2025-03-22 11:58:40"}
+{"level":"debug","message":"Executing (default): SELECT `BlogPost`.`id`, `BlogPost`.`author_id` AS `authorId`, `BlogPost`.`category_id` AS `categoryId`, `BlogPost`.`title`, `BlogPost`.`slug`, `BlogPost`.`content`, `BlogPost`.`excerpt`, `BlogPost`.`featured_image` AS `featuredImage`, `BlogPost`.`status`, `BlogPost`.`published_at` AS `publishedAt`, `BlogPost`.`created_at` AS `createdAt`, `BlogPost`.`updated_at` AS `updatedAt`, `author`.`id` AS `author.id`, `author`.`first_name` AS `author.firstName`, `author`.`last_name` AS `author.lastName`, `author`.`email` AS `author.email`, `category`.`id` AS `category.id`, `category`.`name` AS `category.name` FROM `blog_posts` AS `BlogPost` LEFT OUTER JOIN `users` AS `author` ON `BlogPost`.`author_id` = `author`.`id` LEFT OUTER JOIN `blog_categories` AS `category` ON `BlogPost`.`category_id` = `category`.`id` WHERE `BlogPost`.`id` = 'e709e274-d4c9-489e-93f0-81cd2e114ebb';","timestamp":"2025-03-22 11:58:40"}
+{"level":"debug","message":"Executing (default): SELECT count(*) AS `count` FROM `blog_comments` AS `BlogComment` WHERE `BlogComment`.`status` = 'approved' AND `BlogComment`.`post_id` = 'e709e274-d4c9-489e-93f0-81cd2e114ebb';","timestamp":"2025-03-22 11:58:40"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 12:01:17"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 12:01:17"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 12:01:17"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 12:01:17"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 12:01:17"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 12:01:17"}

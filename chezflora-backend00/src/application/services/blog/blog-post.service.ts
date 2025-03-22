@@ -3,7 +3,7 @@ import { BlogPostRepositoryInterface } from '../../../interfaces/repositories/bl
 import { BlogTagRepositoryInterface } from '../../../interfaces/repositories/blog-tag-repository.interface';
 import { BlogPostDto, BlogPostResponseDto } from '../../../application/dtos/blog/blog-post.dto';
 import { AppError } from '../../../infrastructure/http/middlewares/error.middleware';
-import { BlogPostPublishedEvent } from '../../events/blog/post-published.event';
+import { BlogPostPublishedEvent } from '../../events/blog/blog-post-published.event';
 import { BlogEventsHandler } from '../../events/handlers/blog-events.handler';
 import slugify from 'slugify';
 

@@ -1,5 +1,5 @@
 // src/interfaces/repositories/blog-category-repository.interface.ts
-import { BlogCategoryResponseDto } from '../../application/dtos/blog/blog-category.dto';
+import { BlogCategoryResponseDto } from "../../application/dtos/blog/blog-category.dto";
 
 export interface BlogCategoryRepositoryInterface {
     findAll(): Promise<BlogCategoryResponseDto[]>;

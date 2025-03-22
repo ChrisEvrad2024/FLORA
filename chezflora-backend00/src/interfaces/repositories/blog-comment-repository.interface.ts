@@ -1,13 +1,33 @@
-// src/interfaces/repositories/blog-comment-repository.interface.ts
-import { BlogCommentResponseDto } from '../../application/dtos/blog/blog-comment.dto';
+// src/application/dtos/blog/blog-post.dto.ts
+import { BlogTagResponseDto } from "../../application/dtos/blog/blog-tag.dto";
 
-export interface BlogCommentRepositoryInterface {
-    findByPostId(postId: string, options?: {
-        status?: string;
-        page?: number;
-        limit?: number;
-    }): Promise<{ comments: BlogCommentResponseDto[]; total: number }>;
-    create(userId: string, commentData: Omit<BlogCommentResponseDto, 'id' | 'userId' | 'userName' | 'status' | 'createdAt' | 'updatedAt'>): Promise<BlogCommentResponseDto>;
-    updateStatus(id: string, status: string): Promise<BlogCommentResponseDto | null>;
-    delete(id: string): Promise<boolean>;
+export interface BlogPostDto {
+    title: string;
+    content: string;
+    excerpt?: string;
+    slug?: string;
+    categoryId?: string;
+    featuredImage?: string;
+    status?: string;
+    tags?: (string | { id: string })[];
+}
+
+export interface BlogPostResponseDto {
+    id: string;
+    authorId: string;
+    authorName: string;
+    categoryId: string | null;
+    categoryName: string | null;
+    title: string;
+    slug: string;
+    content: string;
+    excerpt: string;
+    featuredImage: string | null;
+    status: string;
+    publishedAt: Date | null;
+    createdAt: Date;
+    updatedAt: Date;
+    commentCount: number;
+    tags?: BlogTagResponseDto[];
+    viewCount?: number;
 }

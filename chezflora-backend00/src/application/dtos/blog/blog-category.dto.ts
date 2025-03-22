@@ -1,16 +1,13 @@
 // src/application/dtos/blog/blog-category.dto.ts
 export interface BlogCategoryDto {
-    id?: string;
     name: string;
-    description?: string;
     slug?: string;
+    description?: string;
 }
 
-export interface BlogCategoryResponseDto {
+export interface BlogCategoryResponseDto extends BlogCategoryDto {
     id: string;
-    name: string;
-    description?: string;
-    slug: string;
+    postCount?: number;
     createdAt: Date;
     updatedAt: Date;
 }

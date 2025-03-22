@@ -1,13 +1,15 @@
 // src/application/services/blog/blog-tag.service.ts
 import { BlogTagRepositoryInterface } from '../../../interfaces/repositories/blog-tag-repository.interface';
-import { BlogTagDto, BlogTagResponseDto } from '../../../application/dtos/blog/blog-tag.dto';
+import { BlogTagDto, BlogTagResponseDto } from '../../dtos/blog/blog-tag.dto';
 import { AppError } from '../../../infrastructure/http/middlewares/error.middleware';
 import slugify from 'slugify';
 
 export class BlogTagService {
-    constructor(private blogTagRepository: BlogTagRepositoryInterface) {}
+    constructor(
+        private blogTagRepository: BlogTagRepositoryInterface
+    ) {}
 
-    async getAllTags(): Promise<BlogTagResponseDto[]> {
+    async getTags(): Promise<BlogTagResponseDto[]> {
         return this.blogTagRepository.findAll();
     }
 
@@ -36,44 +38,41 @@ export class BlogTagService {
     }
 
     async createTag(tagData: BlogTagDto): Promise<BlogTagResponseDto> {
-        // Générer le slug si non fourni
-        const slug = tagData.slug || slugify(tagData.name, { lower: true });
+        // Générer le slug à partir du nom si non fourni
+        if (!tagData.slug) {
+            tagData.slug = slugify(tagData.name, { lower: true });
+        }
         
         // Vérifier si le slug existe déjà
-        const existingTag = await this.blogTagRepository.findBySlug(slug);
+        const existingTag = await this.blogTagRepository.findBySlug(tagData.slug);
         if (existingTag) {
             throw new AppError('A tag with this slug already exists', 400);
         }
         
-        return this.blogTagRepository.create({
-            ...tagData,
-            slug
-        });
+        return this.blogTagRepository.create(tagData);
     }
 
     async updateTag(id: string, tagData: Partial<BlogTagDto>): Promise<BlogTagResponseDto> {
-        // Si le nom est modifié, mettre à jour le slug
-        let slug = tagData.slug;
+        // Si le nom est mis à jour, mettre à jour le slug
         if (tagData.name && !tagData.slug) {
-            slug = slugify(tagData.name, { lower: true });
-            
-            // Vérifier si le slug existe déjà pour un autre tag
-            const existingTag = await this.blogTagRepository.findBySlug(slug);
+            tagData.slug = slugify(tagData.name, { lower: true });
+        }
+        
+        // Si le slug est mis à jour, vérifier qu'il n'existe pas déjà
+        if (tagData.slug) {
+            const existingTag = await this.blogTagRepository.findBySlug(tagData.slug);
             if (existingTag && existingTag.id !== id) {
                 throw new AppError('A tag with this slug already exists', 400);
             }
         }
         
-        const tag = await this.blogTagRepository.update(id, {
-            ...tagData,
-            slug
-        });
+        const updatedTag = await this.blogTagRepository.update(id, tagData);
         
-        if (!tag) {
+        if (!updatedTag) {
             throw new AppError('Tag not found', 404);
         }
         
-        return tag;
+        return updatedTag;
     }
 
     async deleteTag(id: string): Promise<boolean> {
@@ -114,18 +113,5 @@ export class BlogTagService {
         }
         
         return true;
-    }
-
-    async findOrCreateTagsByNames(tagNames: string[]): Promise<BlogTagResponseDto[]> {
-        const tags: BlogTagResponseDto[] = [];
-        
-        for (const name of tagNames) {
-            if (name.trim()) {
-                const tag = await this.blogTagRepository.findOrCreateByName(name);
-                tags.push(tag);
-            }
-        }
-        
-        return tags;
     }
 }

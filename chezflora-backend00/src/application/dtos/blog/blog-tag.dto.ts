@@ -1,15 +1,12 @@
 // src/application/dtos/blog/blog-tag.dto.ts
 export interface BlogTagDto {
-    id?: string;
     name: string;
     slug?: string;
 }
 
-export interface BlogTagResponseDto {
+export interface BlogTagResponseDto extends BlogTagDto {
     id: string;
-    name: string;
-    slug: string;
+    postCount?: number;
     createdAt: Date;
     updatedAt: Date;
-    postCount?: number;
 }
