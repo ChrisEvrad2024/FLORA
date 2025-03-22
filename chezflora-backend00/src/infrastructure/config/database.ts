@@ -13,6 +13,8 @@ import Product from '../database/models/product.model';
 import NewsletterSubscription from '../database/models/newsletter-subscription.model';
 import BlogCategory from '../database/models/blog-category.model';
 import BlogTag from '../database/models/blog-tag.model';
+import Promotion from '../database/models/promotion.model';
+import { NewsletterExportDto } from '../../application/dtos/promotion/newsletter-export.dto';
 
 // Import des modèles avec dépendances simples
 import BlogPost from '../database/models/blog-post.model';
@@ -28,6 +30,7 @@ import CartItem from '../database/models/cart-item.model';
 import OrderItem from '../database/models/order-item.model';
 import QuoteItem from '../database/models/quote-item.model';
 import BlogPostTag from '../database/models/blog-post-tag.model';
+import Coupon from '../database/models/coupon.model';
 
 dotenv.config();
 
@@ -49,6 +52,8 @@ const models = [
     Quote,
     Invoice,
     Favorite,
+    Promotion,
+    Coupon,
 
     // Modèles avec dépendances complexes
     BlogComment,

@@ -10,6 +10,9 @@ import newsletterRoutes from './newsletter.routes';
 import dashboardRoutes from './dashboard.routes';
 import invoiceRoutes from './invoice.routes';
 import blogRoutes from './blog.routes'; // Importer les routes du blog
+import promotionRoutes from './promotion.routes';
+import couponRoutes from './coupon.routes';
+import newsletterExportRoutes from './newsletter-export.routes';
 
 const router = Router();
 
@@ -24,5 +27,8 @@ router.use('/newsletter', newsletterRoutes);
 router.use('/dashboard', dashboardRoutes);
 router.use('/invoices', invoiceRoutes);
 router.use('/blog', blogRoutes);
+router.use('/promotions', promotionRoutes);
+router.use('/coupons', couponRoutes);
+router.use('/newsletter-export', newsletterExportRoutes);
 
 export default router;
