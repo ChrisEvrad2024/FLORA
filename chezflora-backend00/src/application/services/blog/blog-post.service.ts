@@ -3,6 +3,8 @@ import { BlogPostRepositoryInterface } from '../../../interfaces/repositories/bl
 import { BlogTagRepositoryInterface } from '../../../interfaces/repositories/blog-tag-repository.interface';
 import { BlogPostDto, BlogPostResponseDto } from '../../../application/dtos/blog/blog-post.dto';
 import { AppError } from '../../../infrastructure/http/middlewares/error.middleware';
+import { BlogPostPublishedEvent } from '../../events/blog/post-published.event';
+import { BlogEventsHandler } from '../../events/handlers/blog-events.handler';
 import slugify from 'slugify';
 
 export class BlogPostService {
@@ -97,21 +99,7 @@ export class BlogPostService {
         
         // Si des tags sont fournis, les associer au post
         if (postData.tags && Array.isArray(postData.tags) && postData.tags.length > 0) {
-            // Si ce sont des noms de tags, créer ou récupérer les tags existants
-            if (typeof postData.tags[0] === 'string') {
-                const tagObjects = await Promise.all(
-                    (postData.tags as string[]).map(tagName => 
-                        this.blogTagRepository.findOrCreateByName(tagName)
-                    )
-                );
-                const tagIds = tagObjects.map(tag => tag.id);
-                await this.blogTagRepository.setPostTags(post.id, tagIds);
-            } 
-            // Si ce sont des IDs de tags
-            else if (typeof postData.tags[0] === 'object' && postData.tags[0].id) {
-                const tagIds = (postData.tags as any[]).map(tag => tag.id);
-                await this.blogTagRepository.setPostTags(post.id, tagIds);
-            }
+            await this.processPostTags(post.id, postData.tags);
         }
         
         // Récupérer le post avec les tags
@@ -152,27 +140,8 @@ export class BlogPostService {
         });
         
         // Si des tags sont fournis, mettre à jour les associations
-        if (postData.tags && Array.isArray(postData.tags)) {
-            // Si ce sont des noms de tags, créer ou récupérer les tags existants
-            if (postData.tags.length > 0) {
-                if (typeof postData.tags[0] === 'string') {
-                    const tagObjects = await Promise.all(
-                        (postData.tags as string[]).map(tagName => 
-                            this.blogTagRepository.findOrCreateByName(tagName)
-                        )
-                    );
-                    const tagIds = tagObjects.map(tag => tag.id);
-                    await this.blogTagRepository.setPostTags(id, tagIds);
-                } 
-                // Si ce sont des IDs de tags
-                else if (typeof postData.tags[0] === 'object' && postData.tags[0].id) {
-                    const tagIds = (postData.tags as any[]).map(tag => tag.id);
-                    await this.blogTagRepository.setPostTags(id, tagIds);
-                }
-            } else {
-                // Si le tableau est vide, supprimer toutes les associations
-                await this.blogTagRepository.setPostTags(id, []);
-            }
+        if (postData.tags !== undefined) {
+            await this.processPostTags(id, postData.tags);
         }
         
         // Récupérer le post mis à jour avec les tags
@@ -189,7 +158,7 @@ export class BlogPostService {
         return true;
     }
 
-    async publishPost(id: string): Promise<BlogPostResponseDto> {
+    async publishPost(id: string, publishedBy: string): Promise<BlogPostResponseDto> {
         const post = await this.blogPostRepository.publishPost(id);
         
         if (!post) {
@@ -199,6 +168,10 @@ export class BlogPostService {
         // Récupérer les tags associés au post
         const tags = await this.blogTagRepository.findByPostId(id);
         post.tags = tags;
+        
+        // Déclencher l'événement de publication
+        const publishEvent = new BlogPostPublishedEvent(post, publishedBy);
+        BlogEventsHandler.handlePostPublished(publishEvent);
         
         return post;
     }
@@ -215,5 +188,30 @@ export class BlogPostService {
         post.tags = tags;
         
         return post;
+    }
+
+    private async processPostTags(postId: string, tags: any[]): Promise<void> {
+        // Si ce sont des noms de tags, créer ou récupérer les tags existants
+        if (tags.length > 0) {
+            let tagIds: string[] = [];
+            
+            if (typeof tags[0] === 'string') {
+                const tagObjects = await Promise.all(
+                    (tags as string[]).map(tagName => 
+                        this.blogTagRepository.findOrCreateByName(tagName)
+                    )
+                );
+                tagIds = tagObjects.map(tag => tag.id);
+            } 
+            // Si ce sont des IDs de tags ou des objets avec des IDs
+            else if (typeof tags[0] === 'object') {
+                tagIds = tags.map(tag => typeof tag === 'object' && tag.id ? tag.id : tag);
+            }
+            
+            await this.blogTagRepository.setPostTags(postId, tagIds);
+        } else {
+            // Si le tableau est vide, supprimer toutes les associations
+            await this.blogTagRepository.setPostTags(postId, []);
+        }
     }
 }

@@ -2,6 +2,8 @@
 import { BlogCommentRepositoryInterface } from '../../../interfaces/repositories/blog-comment-repository.interface';
 import { BlogCommentDto, BlogCommentResponseDto } from '../../../application/dtos/blog/blog-comment.dto';
 import { AppError } from '../../../infrastructure/http/middlewares/error.middleware';
+import { BlogCommentApprovedEvent } from '../../events/blog/comment-approved.event';
+import { BlogEventsHandler } from '../../events/handlers/blog-events.handler';
 
 export class BlogCommentService {
     constructor(private blogCommentRepository: BlogCommentRepositoryInterface) {}
@@ -33,12 +35,16 @@ export class BlogCommentService {
         return this.blogCommentRepository.create(userId, commentData);
     }
 
-    async approveComment(id: string): Promise<BlogCommentResponseDto> {
+    async approveComment(id: string, approvedBy: string): Promise<BlogCommentResponseDto> {
         const comment = await this.blogCommentRepository.updateStatus(id, 'approved');
         
         if (!comment) {
             throw new AppError('Comment not found', 404);
         }
+        
+        // Déclencher l'événement d'approbation du commentaire
+        const approvalEvent = new BlogCommentApprovedEvent(comment, approvedBy);
+        BlogEventsHandler.handleCommentApproved(approvalEvent);
         
         return comment;
     }

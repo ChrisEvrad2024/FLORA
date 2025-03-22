@@ -1,3 +1,4 @@
+// src/infrastructure/http/controllers/blog-post.controller.ts
 import { Request, Response, NextFunction } from 'express';
 import { BlogPostService } from '../../../application/services/blog/blog-post.service';
 import { AppError } from '../../http/middlewares/error.middleware';
@@ -8,15 +9,19 @@ export class BlogPostController {
     getPosts = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const categoryId = req.query.categoryId as string;
+            const tagId = req.query.tagId as string;
             const status = req.query.status as string;
+            const search = req.query.search as string;
             const page = parseInt(req.query.page as string) || 1;
             const limit = parseInt(req.query.limit as string) || 10;
             
             const { posts, total, totalPages } = await this.blogPostService.getAllPosts({
                 categoryId,
+                tagId,
                 status,
                 page,
-                limit
+                limit,
+                search
             });
             
             res.status(200).json({
@@ -74,6 +79,12 @@ export class BlogPostController {
             }
             
             const postData = req.body;
+            
+            // Si une URL d'image est fournie dans le body (issue de l'upload)
+            if (req.body.imageUrl) {
+                postData.featuredImage = req.body.imageUrl;
+            }
+            
             const post = await this.blogPostService.createPost(userId, postData);
             
             res.status(201).json({
@@ -90,6 +101,12 @@ export class BlogPostController {
         try {
             const { id } = req.params;
             const postData = req.body;
+            
+            // Si une URL d'image est fournie dans le body (issue de l'upload)
+            if (req.body.imageUrl) {
+                postData.featuredImage = req.body.imageUrl;
+            }
+            
             const post = await this.blogPostService.updatePost(id, postData);
             
             res.status(200).json({
@@ -119,7 +136,9 @@ export class BlogPostController {
     publishPost = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const { id } = req.params;
-            const post = await this.blogPostService.publishPost(id);
+            const userId = req.user?.id || 'system';
+            
+            const post = await this.blogPostService.publishPost(id, userId);
             
             res.status(200).json({
                 success: true,

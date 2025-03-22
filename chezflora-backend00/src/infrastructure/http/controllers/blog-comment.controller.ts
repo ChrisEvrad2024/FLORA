@@ -1,3 +1,4 @@
+// src/infrastructure/http/controllers/blog-comment.controller.ts
 import { Request, Response, NextFunction } from 'express';
 import { BlogCommentService } from '../../../application/services/blog/blog-comment.service';
 import { AppError } from '../../http/middlewares/error.middleware';
@@ -58,7 +59,9 @@ export class BlogCommentController {
     approveComment = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const { id } = req.params;
-            const comment = await this.blogCommentService.approveComment(id);
+            const userId = req.user?.id || 'system';
+            
+            const comment = await this.blogCommentService.approveComment(id, userId);
             
             res.status(200).json({
                 success: true,
