@@ -170,24 +170,34 @@ export class CategoryRepository implements CategoryRepositoryInterface {
         return rootCategories.map(category => category.toJSON() as CategoryEntity);
     }
     async findBySlug(slug: string): Promise<BlogCategoryResponseDto | null> {
-        // Simplifions la requête pour éviter l'erreur
-        const category = await BlogCategory.findOne({
-            where: { slug },
-            // Retirons la sous-requête problématique pour l'instant
-            // Nous ajouterons le comptage après avoir confirmé que ça fonctionne
-        });
+        try {
+            // Utilisation de la méthode findOne standard sans sous-requête problématique
+            const category = await BlogCategory.findOne({
+                where: { slug }
+            });
     
-        if (!category) {
-            return null;
+            if (!category) {
+                return null;
+            }
+    
+            // Compter le nombre de posts séparément
+            // const postCount = await BlogPost.count({
+            //     where: { categoryId: category.id }
+            // });
+    
+            // Retourner l'objet formaté
+            return {
+                id: category.id,
+                name: category.name,
+                description: category.description,
+                slug: category.slug,
+                createdAt: category.createdAt,
+                updatedAt: category.updatedAt,
+                // postCount // ajouter le compte des articles si nécessaire
+            };
+        } catch (error) {
+            console.error("Erreur dans findBySlug:", error);
+            throw error;
         }
-    
-        return {
-            id: category.id,
-            name: category.name,
-            description: category.description,
-            slug: category.slug,
-            createdAt: category.createdAt,
-            updatedAt: category.updatedAt,
-        };
     }
 }

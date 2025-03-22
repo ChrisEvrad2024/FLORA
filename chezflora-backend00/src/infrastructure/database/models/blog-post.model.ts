@@ -1,9 +1,11 @@
 // src/infrastructure/database/models/blog-post.model.ts
-import { Table, Column, Model, DataType, ForeignKey, BelongsTo, HasMany } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, ForeignKey, BelongsTo, HasMany, BelongsToMany } from 'sequelize-typescript';
 import { v4 as uuidv4 } from 'uuid';
 import User from './user.model';
 import BlogCategory from './blog-category.model';
 import BlogComment from './blog-comment.model';
+import BlogTag from './blog-tag.model';
+import BlogPostTag from './blog-post-tag.model';
 
 @Table({
     tableName: 'blog_posts',
@@ -68,6 +70,7 @@ export default class BlogPost extends Model {
     @Column({
         type: DataType.STRING,
         allowNull: true,
+        field: 'featured_image'
     })
     featuredImage?: string;
 
@@ -86,4 +89,7 @@ export default class BlogPost extends Model {
 
     @HasMany(() => BlogComment)
     comments!: BlogComment[];
+
+    @BelongsToMany(() => BlogTag, () => BlogPostTag)
+    tags!: BlogTag[];
 }

@@ -2549,3 +2549,27 @@
 {"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 07:22:48"}
 {"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 07:22:48"}
 {"level":"debug","message":"Executing (default): SELECT `BlogCategory`.* FROM (SELECT `BlogCategory`.`id`, `BlogCategory`.`name`, `BlogCategory`.`description`, `BlogCategory`.`slug`, `BlogCategory`.`created_at` AS `createdAt`, `BlogCategory`.`updated_at` AS `updatedAt`, (SELECT COUNT(*) FROM blog_posts WHERE blog_posts.category_id = blog_categories.id) AS `postCount` FROM `blog_categories` AS `BlogCategory` WHERE `BlogCategory`.`slug` = 'conseils-jardinage' LIMIT 1) AS `BlogCategory` LEFT OUTER JOIN `blog_posts` AS `posts` ON `BlogCategory`.`id` = `posts`.`category_id`;","timestamp":"2025-03-22 07:22:53"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 07:26:52"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 07:26:52"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 07:26:52"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 07:26:52"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 07:26:52"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 07:26:52"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 07:34:13"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 07:34:13"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 07:34:14"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 07:34:14"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 07:34:14"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 07:34:14"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 07:35:14"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 07:35:14"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 07:35:14"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 07:35:14"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 07:35:14"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 07:35:14"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 07:35:45"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 07:35:45"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 07:35:45"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 07:35:45"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 07:35:45"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 07:35:45"}

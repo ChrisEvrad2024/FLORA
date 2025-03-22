@@ -1,3 +1,4 @@
+// src/infrastructure/http/validators/blog.validator.ts
 import Joi from 'joi';
 
 // Blog Category Validation Schemas
@@ -41,7 +42,7 @@ export const updateCategorySchema = Joi.object({
             'string.max': 'Le slug ne peut pas dépasser {#limit} caractères',
             'string.pattern.base': 'Le slug ne peut contenir que des lettres minuscules, des chiffres et des tirets'
         })
-});
+}).min(1);
 
 // Blog Post Validation Schemas
 export const createPostSchema = Joi.object({
@@ -81,11 +82,9 @@ export const createPostSchema = Joi.object({
             'string.base': 'Le statut doit être une chaîne de caractères',
             'any.only': 'Le statut doit être draft, published ou archived'
         }),
-    slug: Joi.string().allow('', null).max(200).pattern(/^[a-z0-9-]+$/)
+    tags: Joi.array().items(Joi.string()).optional()
         .messages({
-            'string.base': 'Le slug doit être une chaîne de caractères',
-            'string.max': 'Le slug ne peut pas dépasser {#limit} caractères',
-            'string.pattern.base': 'Le slug ne peut contenir que des lettres minuscules, des chiffres et des tirets'
+            'array.base': 'Les tags doivent être un tableau'
         })
 });
 
@@ -121,13 +120,11 @@ export const updatePostSchema = Joi.object({
             'string.base': 'Le statut doit être une chaîne de caractères',
             'any.only': 'Le statut doit être draft, published ou archived'
         }),
-    slug: Joi.string().allow('', null).max(200).pattern(/^[a-z0-9-]+$/)
+    tags: Joi.array().items(Joi.string()).optional()
         .messages({
-            'string.base': 'Le slug doit être une chaîne de caractères',
-            'string.max': 'Le slug ne peut pas dépasser {#limit} caractères',
-            'string.pattern.base': 'Le slug ne peut contenir que des lettres minuscules, des chiffres et des tirets'
+            'array.base': 'Les tags doivent être un tableau'
         })
-});
+}).min(1);
 
 // Blog Comment Validation Schemas
 export const createCommentSchema = Joi.object({
@@ -144,5 +141,23 @@ export const createCommentSchema = Joi.object({
             'string.min': 'Le contenu doit contenir au moins {#limit} caractères',
             'string.max': 'Le contenu ne peut pas dépasser {#limit} caractères',
             'any.required': 'Le contenu est requis'
+        })
+});
+
+// Tag Validation Schemas
+export const createTagSchema = Joi.object({
+    name: Joi.string().required().min(2).max(50)
+        .messages({
+            'string.base': 'Le nom doit être une chaîne de caractères',
+            'string.empty': 'Le nom est requis',
+            'string.min': 'Le nom doit contenir au moins {#limit} caractères',
+            'string.max': 'Le nom ne peut pas dépasser {#limit} caractères',
+            'any.required': 'Le nom est requis'
+        }),
+    slug: Joi.string().allow('', null).max(50).pattern(/^[a-z0-9-]+$/)
+        .messages({
+            'string.base': 'Le slug doit être une chaîne de caractères',
+            'string.max': 'Le slug ne peut pas dépasser {#limit} caractères',
+            'string.pattern.base': 'Le slug ne peut contenir que des lettres minuscules, des chiffres et des tirets'
         })
 });
