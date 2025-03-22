@@ -1,35 +1,47 @@
+// src/infrastructure/repositories/blog-post.repository.ts
 import { BlogPostRepositoryInterface } from '../../interfaces/repositories/blog-post-repository.interface';
 import { BlogPostResponseDto } from '../../application/dtos/blog/blog-post.dto';
 import BlogPost from '../database/models/blog-post.model';
 import BlogCategory from '../database/models/blog-category.model';
 import User from '../database/models/user.model';
 import BlogComment from '../database/models/blog-comment.model';
-import { Op } from 'sequelize';
-import slugify from 'slugify';
+import { Op, Sequelize } from 'sequelize';
+import { AppError } from '../http/middlewares/error.middleware';
 
 export class BlogPostRepository implements BlogPostRepositoryInterface {
     async findAll(options?: {
         categoryId?: string;
+        tagId?: string;
         status?: string;
         page?: number;
         limit?: number;
+        search?: string;
     }): Promise<{ posts: BlogPostResponseDto[]; total: number }> {
-        const where: any = {};
+        const whereClause: any = {};
         
         if (options?.categoryId) {
-            where.categoryId = options.categoryId;
+            whereClause.categoryId = options.categoryId;
         }
         
         if (options?.status) {
-            where.status = options.status;
+            whereClause.status = options.status;
+        } else {
+            // Par défaut, retourne uniquement les articles publiés
+            whereClause.status = 'published';
         }
         
-        const page = options?.page || 1;
-        const limit = options?.limit || 10;
-        const offset = (page - 1) * limit;
+        // Si une recherche est fournie
+        if (options?.search) {
+            whereClause[Op.or] = [
+                { title: { [Op.like]: `%${options.search}%` } },
+                { content: { [Op.like]: `%${options.search}%` } },
+                { excerpt: { [Op.like]: `%${options.search}%` } }
+            ];
+        }
         
-        const { count, rows } = await BlogPost.findAndCountAll({
-            where,
+        // Construire les options de requête
+        const queryOptions: any = {
+            where: whereClause,
             include: [
                 {
                     model: User,
@@ -39,39 +51,45 @@ export class BlogPostRepository implements BlogPostRepositoryInterface {
                 {
                     model: BlogCategory,
                     as: 'category',
-                    attributes: ['id', 'name', 'slug']
+                    attributes: ['id', 'name']
                 }
             ],
-            attributes: {
-                include: [
-                    [
-                        BlogPost.sequelize!.literal('(SELECT COUNT(*) FROM blog_comments WHERE blog_comments.post_id = blog_posts.id)'),
-                        'commentCount'
-                    ]
-                ]
-            },
-            order: [['publishedAt', 'DESC'], ['createdAt', 'DESC']],
-            limit,
-            offset
-        });
+            order: [['createdAt', 'DESC']]
+        };
         
-        const posts = rows.map(post => ({
-            id: post.id,
-            authorId: post.authorId,
-            authorName: `${post.author.firstName} ${post.author.lastName}`,
-            categoryId: post.categoryId,
-            categoryName: post.category.name,
-            title: post.title,
-            slug: post.slug,
-            content: post.content,
-            excerpt: post.excerpt,
-            featuredImage: post.featuredImage,
-            status: post.status,
-            publishedAt: post.publishedAt,
-            createdAt: post.createdAt,
-            updatedAt: post.updatedAt,
-            commentCount: post.get('commentCount') as number
-        }));
+        // Si le tagId est fourni, ajouter une condition pour les tags
+        if (options?.tagId) {
+            queryOptions.include.push({
+                model: BlogPost.associations.tags.target,
+                as: 'tags',
+                where: { id: options.tagId },
+                attributes: [],
+                through: { attributes: [] }
+            });
+        }
+        
+        // Pagination
+        if (options?.page && options?.limit) {
+            queryOptions.limit = options.limit;
+            queryOptions.offset = (options.page - 1) * options.limit;
+        }
+        
+        // Exécuter la requête
+        const { rows, count } = await BlogPost.findAndCountAll(queryOptions);
+        
+        // Mapper les résultats
+        const posts = await Promise.all(
+            rows.map(async (post) => {
+                const commentCount = await BlogComment.count({
+                    where: {
+                        postId: post.id,
+                        status: 'approved'
+                    }
+                });
+                
+                return this.mapToPostResponseDto(post, commentCount);
+            })
+        );
         
         return {
             posts,
@@ -90,45 +108,30 @@ export class BlogPostRepository implements BlogPostRepositoryInterface {
                 {
                     model: BlogCategory,
                     as: 'category',
-                    attributes: ['id', 'name', 'slug']
+                    attributes: ['id', 'name']
                 }
-            ],
-            attributes: {
-                include: [
-                    [
-                        BlogPost.sequelize!.literal('(SELECT COUNT(*) FROM blog_comments WHERE blog_comments.post_id = blog_posts.id)'),
-                        'commentCount'
-                    ]
-                ]
-            }
+            ]
         });
         
         if (!post) {
             return null;
         }
         
-        return {
-            id: post.id,
-            authorId: post.authorId,
-            authorName: `${post.author.firstName} ${post.author.lastName}`,
-            categoryId: post.categoryId,
-            categoryName: post.category.name,
-            title: post.title,
-            slug: post.slug,
-            content: post.content,
-            excerpt: post.excerpt,
-            featuredImage: post.featuredImage,
-            status: post.status,
-            publishedAt: post.publishedAt,
-            createdAt: post.createdAt,
-            updatedAt: post.updatedAt,
-            commentCount: post.get('commentCount') as number
-        };
+        const commentCount = await BlogComment.count({
+            where: {
+                postId: post.id,
+                status: 'approved'
+            }
+        });
+        
+        return this.mapToPostResponseDto(post, commentCount);
     }
     
     async findBySlug(slug: string): Promise<BlogPostResponseDto | null> {
         const post = await BlogPost.findOne({
-            where: { slug },
+            where: {
+                slug
+            },
             include: [
                 {
                     model: User,
@@ -138,86 +141,127 @@ export class BlogPostRepository implements BlogPostRepositoryInterface {
                 {
                     model: BlogCategory,
                     as: 'category',
-                    attributes: ['id', 'name', 'slug']
+                    attributes: ['id', 'name']
                 }
-            ],
-            attributes: {
-                include: [
-                    [
-                        BlogPost.sequelize!.literal('(SELECT COUNT(*) FROM blog_comments WHERE blog_comments.post_id = blog_posts.id)'),
-                        'commentCount'
-                    ]
-                ]
+            ]
+        });
+        
+        if (!post) {
+            return null;
+        }
+        
+        const commentCount = await BlogComment.count({
+            where: {
+                postId: post.id,
+                status: 'approved'
             }
         });
         
-        if (!post) {
-            return null;
-        }
+        // Incrémenter le compteur de vues
+        await this.incrementViewCount(post.id);
         
-        return {
-            id: post.id,
-            authorId: post.authorId,
-            authorName: `${post.author.firstName} ${post.author.lastName}`,
-            categoryId: post.categoryId,
-            categoryName: post.category.name,
-            title: post.title,
-            slug: post.slug,
-            content: post.content,
-            excerpt: post.excerpt,
-            featuredImage: post.featuredImage,
-            status: post.status,
-            publishedAt: post.publishedAt,
-            createdAt: post.createdAt,
-            updatedAt: post.updatedAt,
-            commentCount: post.get('commentCount') as number
-        };
+        return this.mapToPostResponseDto(post, commentCount);
     }
     
     async create(authorId: string, postData: Omit<BlogPostResponseDto, 'id' | 'authorId' | 'authorName' | 'categoryName' | 'createdAt' | 'updatedAt' | 'commentCount'>): Promise<BlogPostResponseDto> {
-        // Generate slug from title if not provided
-        const slug = postData.slug || slugify(postData.title, { lower: true });
-        
-        const post = await BlogPost.create({
-            ...postData,
-            authorId,
-            slug
-        });
-        
-        const createdPost = await this.findById(post.id);
-        
-        if (!createdPost) {
-            throw new Error('Failed to retrieve created post');
+        try {
+            const post = await BlogPost.create({
+                ...postData,
+                authorId
+            });
+            
+            // Charger les relations pour construire la réponse
+            const postWithRelations = await BlogPost.findByPk(post.id, {
+                include: [
+                    {
+                        model: User,
+                        as: 'author',
+                        attributes: ['id', 'firstName', 'lastName', 'email']
+                    },
+                    {
+                        model: BlogCategory,
+                        as: 'category',
+                        attributes: ['id', 'name']
+                    }
+                ]
+            });
+            
+            if (!postWithRelations) {
+                throw new AppError('Failed to create post', 500);
+            }
+            
+            return this.mapToPostResponseDto(postWithRelations, 0);
+        } catch (error: any) {
+            if (error.name === 'SequelizeUniqueConstraintError') {
+                throw new AppError('A post with this title or slug already exists', 400);
+            }
+            
+            throw error;
         }
-        
-        return createdPost;
     }
     
     async update(id: string, postData: Partial<BlogPostResponseDto>): Promise<BlogPostResponseDto | null> {
-        const post = await BlogPost.findByPk(id);
-        
-        if (!post) {
-            return null;
+        try {
+            const post = await BlogPost.findByPk(id);
+            
+            if (!post) {
+                return null;
+            }
+            
+            // Filtrer les données à mettre à jour
+            const dataToUpdate: any = { ...postData };
+            delete dataToUpdate.authorName;
+            delete dataToUpdate.categoryName;
+            delete dataToUpdate.commentCount;
+            delete dataToUpdate.tags;
+            
+            await post.update(dataToUpdate);
+            
+            // Récupérer le post mis à jour avec les relations
+            const updatedPost = await BlogPost.findByPk(id, {
+                include: [
+                    {
+                        model: User,
+                        as: 'author',
+                        attributes: ['id', 'firstName', 'lastName', 'email']
+                    },
+                    {
+                        model: BlogCategory,
+                        as: 'category',
+                        attributes: ['id', 'name']
+                    }
+                ]
+            });
+            
+            if (!updatedPost) {
+                throw new AppError('Failed to update post', 500);
+            }
+            
+            const commentCount = await BlogComment.count({
+                where: {
+                    postId: id,
+                    status: 'approved'
+                }
+            });
+            
+            return this.mapToPostResponseDto(updatedPost, commentCount);
+        } catch (error: any) {
+            if (error.name === 'SequelizeUniqueConstraintError') {
+                throw new AppError('A post with this title or slug already exists', 400);
+            }
+            
+            throw error;
         }
-        
-        // Generate slug from title if title is provided but slug isn't
-        if (postData.title && !postData.slug) {
-            postData.slug = slugify(postData.title, { lower: true });
-        }
-        
-        await post.update({
-            ...postData
-        });
-        
-        return this.findById(id);
     }
     
     async delete(id: string): Promise<boolean> {
-        const result = await BlogPost.destroy({
-            where: { id }
+        const deleted = await BlogPost.destroy({
+            where: {
+                id
+            }
         });
         
-        return result > 0;
+        return deleted > 0;
     }
     
     async publishPost(id: string): Promise<BlogPostResponseDto | null> {
@@ -232,7 +276,34 @@ export class BlogPostRepository implements BlogPostRepositoryInterface {
             publishedAt: new Date()
         });
         
-        return this.findById(id);
+        // Récupérer le post mis à jour avec les relations
+        const publishedPost = await BlogPost.findByPk(id, {
+            include: [
+                {
+                    model: User,
+                    as: 'author',
+                    attributes: ['id', 'firstName', 'lastName', 'email']
+                },
+                {
+                    model: BlogCategory,
+                    as: 'category',
+                    attributes: ['id', 'name']
+                }
+            ]
+        });
+        
+        if (!publishedPost) {
+            throw new AppError('Failed to publish post', 500);
+        }
+        
+        const commentCount = await BlogComment.count({
+            where: {
+                postId: id,
+                status: 'approved'
+            }
+        });
+        
+        return this.mapToPostResponseDto(publishedPost, commentCount);
     }
     
     async archivePost(id: string): Promise<BlogPostResponseDto | null> {
@@ -246,6 +317,76 @@ export class BlogPostRepository implements BlogPostRepositoryInterface {
             status: 'archived'
         });
         
-        return this.findById(id);
+        // Récupérer le post mis à jour avec les relations
+        const archivedPost = await BlogPost.findByPk(id, {
+            include: [
+                {
+                    model: User,
+                    as: 'author',
+                    attributes: ['id', 'firstName', 'lastName', 'email']
+                },
+                {
+                    model: BlogCategory,
+                    as: 'category',
+                    attributes: ['id', 'name']
+                }
+            ]
+        });
+        
+        if (!archivedPost) {
+            throw new AppError('Failed to archive post', 500);
+        }
+        
+        const commentCount = await BlogComment.count({
+            where: {
+                postId: id,
+                status: 'approved'
+            }
+        });
+        
+        return this.mapToPostResponseDto(archivedPost, commentCount);
+    }
+    
+    private async incrementViewCount(postId: string): Promise<void> {
+        try {
+            // Si une table de comptage de vues existe, incrémenter le compteur
+            await this.sequelize.query(`
+                INSERT INTO blog_post_views (post_id, view_count, created_at, updated_at)
+                VALUES (:postId, 1, NOW(), NOW())
+                ON DUPLICATE KEY UPDATE
+                    view_count = view_count + 1,
+                    updated_at = NOW()
+            `, {
+                replacements: { postId }
+            });
+        } catch (error) {
+            // Si la table n'existe pas encore, ignorer l'erreur
+            console.log('View tracking not available, skipping...');
+        }
+    }
+    
+    private mapToPostResponseDto(post: BlogPost, commentCount: number): BlogPostResponseDto {
+        return {
+            id: post.id,
+            authorId: post.authorId,
+            authorName: post.author ? `${post.author.firstName} ${post.author.lastName}` : 'Unknown',
+            categoryId: post.categoryId,
+            categoryName: post.category ? post.category.name : 'Unknown',
+            title: post.title,
+            slug: post.slug,
+            content: post.content,
+            excerpt: post.excerpt,
+            featuredImage: post.featuredImage,
+            status: post.status,
+            publishedAt: post.publishedAt,
+            createdAt: post.createdAt,
+            updatedAt: post.updatedAt,
+            commentCount: commentCount
+        };
+    }
+    
+    // Propriété pour accéder à Sequelize
+    private get sequelize(): Sequelize {
+        return BlogPost.sequelize!;
     }
 }

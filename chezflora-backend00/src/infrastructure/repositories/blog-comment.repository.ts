@@ -1,9 +1,10 @@
+// src/infrastructure/repositories/blog-comment.repository.ts
 import { BlogCommentRepositoryInterface } from '../../interfaces/repositories/blog-comment-repository.interface';
 import { BlogCommentResponseDto } from '../../application/dtos/blog/blog-comment.dto';
 import BlogComment from '../database/models/blog-comment.model';
 import User from '../database/models/user.model';
 import BlogPost from '../database/models/blog-post.model';
-import { Op } from 'sequelize';
+import { AppError } from '../http/middlewares/error.middleware';
 
 export class BlogCommentRepository implements BlogCommentRepositoryInterface {
     async findByPostId(postId: string, options?: {
@@ -11,45 +12,36 @@ export class BlogCommentRepository implements BlogCommentRepositoryInterface {
         page?: number;
         limit?: number;
     }): Promise<{ comments: BlogCommentResponseDto[]; total: number }> {
-        const where: any = { postId };
+        const whereClause: any = {
+            postId
+        };
         
         if (options?.status) {
-            where.status = options.status;
+            whereClause.status = options.status;
         }
         
-        const page = options?.page || 1;
-        const limit = options?.limit || 10;
-        const offset = (page - 1) * limit;
-        
-        const { count, rows } = await BlogComment.findAndCountAll({
-            where,
+        const queryOptions: any = {
+            where: whereClause,
             include: [
                 {
                     model: User,
                     as: 'user',
                     attributes: ['id', 'firstName', 'lastName', 'email']
-                },
-                {
-                    model: BlogPost,
-                    as: 'post',
-                    attributes: ['id', 'title', 'slug']
                 }
             ],
-            order: [['createdAt', 'DESC']],
-            limit,
-            offset
-        });
+            order: [['createdAt', 'DESC']]
+        };
         
-        const comments = rows.map(comment => ({
-            id: comment.id,
-            postId: comment.postId,
-            userId: comment.userId,
-            userName: `${comment.user.firstName} ${comment.user.lastName}`,
-            content: comment.content,
-            status: comment.status,
-            createdAt: comment.createdAt,
-            updatedAt: comment.updatedAt
-        }));
+        // Pagination
+        if (options?.page && options?.limit) {
+            queryOptions.limit = options.limit;
+            queryOptions.offset = (options.page - 1) * options.limit;
+        }
+        
+        const { rows, count } = await BlogComment.findAndCountAll(queryOptions);
+        
+        // Mapper les résultats
+        const comments = rows.map(comment => this.mapToCommentResponseDto(comment));
         
         return {
             comments,
@@ -58,28 +50,36 @@ export class BlogCommentRepository implements BlogCommentRepositoryInterface {
     }
     
     async create(userId: string, commentData: Omit<BlogCommentResponseDto, 'id' | 'userId' | 'userName' | 'status' | 'createdAt' | 'updatedAt'>): Promise<BlogCommentResponseDto> {
+        // Vérifier si l'article existe
+        const post = await BlogPost.findByPk(commentData.postId);
+        
+        if (!post) {
+            throw new AppError('Post not found', 404);
+        }
+        
+        // Créer le commentaire
         const comment = await BlogComment.create({
             ...commentData,
             userId,
-            status: 'pending'
+            status: 'pending' // Par défaut, les commentaires sont en attente de modération
         });
         
-        const user = await User.findByPk(userId);
+        // Charger les relations pour construire la réponse
+        const commentWithUser = await BlogComment.findByPk(comment.id, {
+            include: [
+                {
+                    model: User,
+                    as: 'user',
+                    attributes: ['id', 'firstName', 'lastName', 'email']
+                }
+            ]
+        });
         
-        if (!user) {
-            throw new Error('User not found');
+        if (!commentWithUser) {
+            throw new AppError('Failed to create comment', 500);
         }
         
-        return {
-            id: comment.id,
-            postId: comment.postId,
-            userId: comment.userId,
-            userName: `${user.firstName} ${user.lastName}`,
-            content: comment.content,
-            status: comment.status,
-            createdAt: comment.createdAt,
-            updatedAt: comment.updatedAt
-        };
+        return this.mapToCommentResponseDto(commentWithUser);
     }
     
     async updateStatus(id: string, status: string): Promise<BlogCommentResponseDto | null> {
@@ -99,23 +99,29 @@ export class BlogCommentRepository implements BlogCommentRepositoryInterface {
         
         await comment.update({ status });
         
+        return this.mapToCommentResponseDto(comment);
+    }
+    
+    async delete(id: string): Promise<boolean> {
+        const deleted = await BlogComment.destroy({
+            where: {
+                id
+            }
+        });
+        
+        return deleted > 0;
+    }
+    
+    private mapToCommentResponseDto(comment: BlogComment): BlogCommentResponseDto {
         return {
             id: comment.id,
             postId: comment.postId,
             userId: comment.userId,
-            userName: `${comment.user.firstName} ${comment.user.lastName}`,
+            userName: comment.user ? `${comment.user.firstName} ${comment.user.lastName}` : 'Anonymous',
             content: comment.content,
             status: comment.status,
             createdAt: comment.createdAt,
             updatedAt: comment.updatedAt
         };
-    }
-    
-    async delete(id: string): Promise<boolean> {
-        const result = await BlogComment.destroy({
-            where: { id }
-        });
-        
-        return result > 0;
     }
 }

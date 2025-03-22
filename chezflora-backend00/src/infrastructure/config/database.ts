@@ -5,44 +5,57 @@ import path from 'path';
 import fs from 'fs';
 import logger from '../logger';
 
-// Import des modèles
+// Import des modèles de base (sans dépendances complexes d'abord)
 import User from '../database/models/user.model';
 import Address from '../database/models/address.model';
-import Product from '../database/models/product.model';
 import Category from '../database/models/category.model';
-import Cart from '../database/models/cart.model';
-import CartItem from '../database/models/cart-item.model';
-import Order from '../database/models/order.model';
-import OrderItem from '../database/models/order-item.model';
-import Quote from '../database/models/quote.model';
-import QuoteItem from '../database/models/quote-item.model';
-import Favorite from '../database/models/favorite.model';
+import Product from '../database/models/product.model';
 import NewsletterSubscription from '../database/models/newsletter-subscription.model';
-import Invoice from '../database/models/invoice.model';
 import BlogCategory from '../database/models/blog-category.model';
+import BlogTag from '../database/models/blog-tag.model';
+
+// Import des modèles avec dépendances simples
 import BlogPost from '../database/models/blog-post.model';
+import Cart from '../database/models/cart.model';
+import Order from '../database/models/order.model';
+import Quote from '../database/models/quote.model';
+import Invoice from '../database/models/invoice.model';
+import Favorite from '../database/models/favorite.model';
+
+// Import des modèles avec dépendances complexes
 import BlogComment from '../database/models/blog-comment.model';
+import CartItem from '../database/models/cart-item.model';
+import OrderItem from '../database/models/order-item.model';
+import QuoteItem from '../database/models/quote-item.model';
+import BlogPostTag from '../database/models/blog-post-tag.model';
 
 dotenv.config();
 
-// Liste de tous les modèles
+// Liste de tous les modèles (dans l'ordre optimisé pour éviter les problèmes de dépendances)
 const models = [
+    // Modèles sans dépendances
     User,
     Address,
-    Product,
     Category,
-    Cart,
-    CartItem,
-    Order,
-    OrderItem,
-    Quote,
-    QuoteItem,
-    Favorite,
+    Product,
     NewsletterSubscription,
-    Invoice,
     BlogCategory,
+    BlogTag,
+    
+    // Modèles avec dépendances simples
     BlogPost,
-    BlogComment
+    Cart,
+    Order,
+    Quote,
+    Invoice,
+    Favorite,
+    
+    // Modèles avec dépendances complexes
+    BlogComment,
+    CartItem,
+    OrderItem,
+    QuoteItem,
+    BlogPostTag
 ];
 
 export const sequelize = new Sequelize({

@@ -1,156 +1,215 @@
+// src/infrastructure/repositories/blog-category.repository.ts
 import { BlogCategoryRepositoryInterface } from '../../interfaces/repositories/blog-category-repository.interface';
-import { BlogCategoryResponseDto } from '../../application/dtos/blog/blog-category.dto';
-import BlogCategory from '../database/models/blog-category.model';
+import { BlogCommentRepositoryInterface } from '../../interfaces/repositories/blog-comment-repository.interface';
+import { BlogCommentResponseDto } from '../../application/dtos/blog/blog-comment.dto';
+import BlogComment from '../database/models/blog-comment.model';
 import BlogPost from '../database/models/blog-post.model';
-import { Op } from 'sequelize';
-import slugify from 'slugify';
+import User from '../database/models/user.model';
+import { Op, Sequelize } from 'sequelize';
+import { BlogCommentAddedEvent } from '../../application/events/blog/blog-comment-added.event';
+import { BlogEventsHandler } from '../../application/events/handlers/blog-events.handler';
 
-export class BlogCategoryRepository implements BlogCategoryRepositoryInterface {
-    async findAll(): Promise<BlogCategoryResponseDto[]> {
-        const categories = await BlogCategory.findAll({
+export class BlogCommentRepository implements BlogCommentRepositoryInterface {
+    async findByPostId(
+        postId: string,
+        options?: {
+            status?: string;
+            page?: number;
+            limit?: number;
+        }
+    ): Promise<{ comments: BlogCommentResponseDto[]; total: number }> {
+        const page = options?.page || 1;
+        const limit = options?.limit || 10;
+        const offset = (page - 1) * limit;
+
+        const whereConditions: any = {
+            postId
+        };
+
+        // Filtrer par statut si spécifié
+        if (options?.status) {
+            whereConditions.status = options.status;
+        }
+
+        // Si postId est "all", supprimer la condition pour récupérer tous les commentaires
+        if (postId === 'all') {
+            delete whereConditions.postId;
+        }
+
+        const { rows, count } = await BlogComment.findAndCountAll({
+            where: whereConditions,
             include: [
                 {
+                    model: User,
+                    attributes: ['id', 'firstName', 'lastName']
+                },
+                {
                     model: BlogPost,
-                    attributes: []
+                    attributes: ['id', 'title']
                 }
             ],
-            attributes: {
-                include: [
-                    [
-                        // Count the number of posts in each category
-                        // This is equivalent to: SELECT COUNT(*) FROM blog_posts WHERE blog_posts.category_id = blog_categories.id
-                        // As a virtual field named 'postCount'
-                        BlogCategory.sequelize!.literal('(SELECT COUNT(*) FROM blog_posts WHERE blog_posts.category_id = blog_categories.id)'),
-                        'postCount'
-                    ]
-                ]
-            },
-            order: [['name', 'ASC']]
+            order: [['createdAt', 'DESC']],
+            offset,
+            limit
         });
 
-        return categories.map(category => ({
-            id: category.id,
-            name: category.name,
-            description: category.description,
-            slug: category.slug,
-            createdAt: category.createdAt,
-            updatedAt: category.updatedAt
-        }));
+        return {
+            comments: rows.map(comment => this.mapToDto(comment)),
+            total: count
+        };
     }
 
-    async findById(id: string): Promise<BlogCategoryResponseDto | null> {
-        const category = await BlogCategory.findByPk(id, {
-            include: [
-                {
-                    model: BlogPost,
-                    attributes: []
-                }
-            ],
-            attributes: {
-                include: [
-                    [
-                        BlogCategory.sequelize!.literal('(SELECT COUNT(*) FROM blog_posts WHERE blog_posts.category_id = blog_categories.id)'),
-                        'postCount'
-                    ]
-                ]
-            }
+    async create(
+        userId: string,
+        commentData: Omit<BlogCommentResponseDto, 'id' | 'userId' | 'userName' | 'status' | 'createdAt' | 'updatedAt'>
+    ): Promise<BlogCommentResponseDto> {
+        const comment = await BlogComment.create({
+            userId,
+            postId: commentData.postId,
+            content: commentData.content,
+            status: 'pending' // Par défaut, les commentaires sont en attente de modération
         });
 
-        if (!category) {
+        // Charger les relations pour obtenir les noms
+        await comment.reload({
+            include: [
+                {
+                    model: User,
+                    attributes: ['id', 'firstName', 'lastName']
+                }
+            ]
+        });
+
+        const commentDto = this.mapToDto(comment);
+
+        // Déclencher l'événement de création de commentaire
+        const commentAddedEvent = new BlogCommentAddedEvent(commentDto, commentData.postId);
+        BlogEventsHandler.handleCommentAdded(commentAddedEvent);
+
+        return commentDto;
+    }
+
+    async updateStatus(id: string, status: string): Promise<BlogCommentResponseDto | null> {
+        const comment = await BlogComment.findByPk(id, {
+            include: [
+                {
+                    model: User,
+                    attributes: ['id', 'firstName', 'lastName']
+                }
+            ]
+        });
+
+        if (!comment) {
             return null;
         }
 
-        return {
-            id: category.id,
-            name: category.name,
-            description: category.description,
-            slug: category.slug,
-            createdAt: category.createdAt,
-            updatedAt: category.updatedAt
-        };
-    }
+        await comment.update({ status });
 
-    async findBySlug(slug: string): Promise<BlogCategoryResponseDto | null> {
-        const category = await BlogCategory.findOne({
-            where: { slug },
-            include: [
-                {
-                    model: BlogPost,
-                    attributes: []
-                }
-            ],
-            attributes: {
-                include: [
-                    [
-                        BlogCategory.sequelize!.literal('(SELECT COUNT(*) FROM blog_posts WHERE blog_posts.category_id = blog_categories.id)'),
-                        'postCount'
-                    ]
-                ]
-            }
-        });
-
-        if (!category) {
-            return null;
-        }
-
-        return {
-            id: category.id,
-            name: category.name,
-            description: category.description,
-            slug: category.slug,
-            createdAt: category.createdAt,
-            updatedAt: category.updatedAt
-        };
-    }
-
-    async create(categoryData: Omit<BlogCategoryResponseDto, 'id' | 'createdAt' | 'updatedAt'>): Promise<BlogCategoryResponseDto> {
-        // Generate slug if not provided
-        const slug = categoryData.slug || slugify(categoryData.name, { lower: true });
-        
-        const category = await BlogCategory.create({
-            ...categoryData,
-            slug
-        });
-
-        return {
-            id: category.id,
-            name: category.name,
-            description: category.description,
-            slug: category.slug,
-            createdAt: category.createdAt,
-            updatedAt: category.updatedAt
-        };
-    }
-
-    async update(id: string, categoryData: Partial<BlogCategoryResponseDto>): Promise<BlogCategoryResponseDto | null> {
-        const category = await BlogCategory.findByPk(id);
-        
-        if (!category) {
-            return null;
-        }
-
-        // If name is updated, update slug if slug is not provided
-        if (categoryData.name && !categoryData.slug) {
-            categoryData.slug = slugify(categoryData.name, { lower: true });
-        }
-
-        await category.update(categoryData);
-
-        return {
-            id: category.id,
-            name: category.name,
-            description: category.description,
-            slug: category.slug,
-            createdAt: category.createdAt,
-            updatedAt: category.updatedAt
-        };
+        return this.mapToDto(comment);
     }
 
     async delete(id: string): Promise<boolean> {
-        const result = await BlogCategory.destroy({
+        const deleted = await BlogComment.destroy({
             where: { id }
         });
 
-        return result > 0;
+        return deleted > 0;
+    }
+
+    // Méthodes avancées
+    async findRecentComments(
+        limit: number = 10,
+        status: string = 'approved'
+    ): Promise<BlogCommentResponseDto[]> {
+        const comments = await BlogComment.findAll({
+            where: {
+                status
+            },
+            include: [
+                {
+                    model: User,
+                    attributes: ['id', 'firstName', 'lastName']
+                },
+                {
+                    model: BlogPost,
+                    attributes: ['id', 'title']
+                }
+            ],
+            order: [['createdAt', 'DESC']],
+            limit
+        });
+
+        return comments.map(comment => this.mapToDto(comment));
+    }
+
+    async findCommentsByUser(
+        userId: string,
+        options?: {
+            status?: string;
+            page?: number;
+            limit?: number;
+        }
+    ): Promise<{ comments: BlogCommentResponseDto[]; total: number }> {
+        const page = options?.page || 1;
+        const limit = options?.limit || 10;
+        const offset = (page - 1) * limit;
+
+        const whereConditions: any = {
+            userId
+        };
+
+        if (options?.status) {
+            whereConditions.status = options.status;
+        }
+
+        const { rows, count } = await BlogComment.findAndCountAll({
+            where: whereConditions,
+            include: [
+                {
+                    model: User,
+                    attributes: ['id', 'firstName', 'lastName']
+                },
+                {
+                    model: BlogPost,
+                    attributes: ['id', 'title']
+                }
+            ],
+            order: [['createdAt', 'DESC']],
+            offset,
+            limit
+        });
+
+        return {
+            comments: rows.map(comment => this.mapToDto(comment)),
+            total: count
+        };
+    }
+
+    async countCommentsByStatus(): Promise<Array<{ status: string; count: number }>> {
+        const results = await BlogComment.findAll({
+            attributes: [
+                'status',
+                [Sequelize.fn('COUNT', Sequelize.col('id')), 'count']
+            ],
+            group: ['status']
+        });
+
+        return results.map(result => ({
+            status: result.status,
+            count: parseInt(result.getDataValue('count'), 10)
+        }));
+    }
+
+    private mapToDto(comment: BlogComment): BlogCommentResponseDto {
+        return {
+            id: comment.id,
+            postId: comment.postId,
+            userId: comment.userId,
+            userName: comment.user ? `${comment.user.firstName} ${comment.user.lastName}` : 'Unknown',
+            content: comment.content,
+            status: comment.status,
+            createdAt: comment.createdAt,
+            updatedAt: comment.updatedAt
+        };
     }
 }

@@ -10,7 +10,7 @@ import { BlogPostService } from '../../../application/services/blog/blog-post.se
 import { BlogCommentService } from '../../../application/services/blog/blog-comment.service';
 import { BlogTagService } from '../../../application/services/blog/blog-tag.service';
 
-import { BlogCategoryRepository } from '../../repositories/blog-category.repository';
+import { BlogCategoryRepository } from '../../../infrastructure/repositories/blog-category.repository';
 import { BlogPostRepository } from '../../repositories/blog-post.repository';
 import { BlogCommentRepository } from '../../repositories/blog-comment.repository';
 import { BlogTagRepository } from '../../repositories/blog-tag.repository';

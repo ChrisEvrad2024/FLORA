@@ -131,13 +131,19 @@ export class BlogPostService {
             throw new AppError('Post not found', 404);
         }
         
-        // Mettre à jour le post
-        const post = await this.blogPostRepository.update(id, {
-            ...postData,
+        // Préparer les données de mise à jour SANS les tags
+        const updateData: Partial<BlogPostResponseDto> = {
+            title: postData.title,
+            content: postData.content,
+            excerpt: excerpt || postData.excerpt || existingPost.excerpt,
+            categoryId: postData.categoryId,
             status: postData.status || existingPost.status,
             slug: slug || existingPost.slug,
-            excerpt: excerpt || postData.excerpt || existingPost.excerpt
-        });
+            featuredImage: postData.featuredImage
+        };
+        
+        // Mettre à jour le post
+        const post = await this.blogPostRepository.update(id, updateData);
         
         // Si des tags sont fournis, mettre à jour les associations
         if (postData.tags !== undefined) {
