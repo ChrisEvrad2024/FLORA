@@ -1,4 +1,3 @@
-// src/infrastructure/database/models/promotion-product.model.ts
 import { Table, Column, Model, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import { v4 as uuidv4 } from 'uuid';
 import Promotion from './promotion.model';
@@ -36,6 +35,7 @@ export default class PromotionProduct extends Model {
     })
     productId!: string;
 
+    // Fix: Use a unique alias like 'productItem' or just 'product' (default)
     @BelongsTo(() => Product)
     product!: Product;
 }

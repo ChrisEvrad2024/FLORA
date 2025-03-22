@@ -1,9 +1,8 @@
-// src/infrastructure/database/models/product.model.ts
 import { Table, Column, Model, DataType, ForeignKey, BelongsTo, HasMany } from 'sequelize-typescript';
 import { v4 as uuidv4 } from 'uuid';
 import Category from './category.model';
-import CartItem from './cart-item.model';
-import OrderItem from './order-item.model';
+import ProductImage from './product-image.model';
+import { CartItem, OrderItem } from '.';
 
 @Table({
     tableName: 'products',
@@ -26,8 +25,11 @@ export default class Product extends Model {
     })
     categoryId!: string;
 
-    @BelongsTo(() => Category)
-    category!: Category;
+    // Fix: Garder l'alias par défaut 'category' ou spécifier explicitement un alias différent
+    // Si vous gardez simplement @BelongsTo(() => Category), l'alias par défaut sera 'category'
+    // Option 1: Utiliser un alias explicite
+    @BelongsTo(() => Category, { as: 'productCategory' })
+    productCategory!: Category;
 
     @Column({
         type: DataType.STRING,
@@ -66,6 +68,9 @@ export default class Product extends Model {
         defaultValue: true,
     })
     isActive!: boolean;
+
+    @HasMany(() => ProductImage)
+    images!: ProductImage[];
 
     @HasMany(() => CartItem)
     cartItems!: CartItem[];

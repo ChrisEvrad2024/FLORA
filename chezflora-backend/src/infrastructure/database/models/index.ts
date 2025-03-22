@@ -1,22 +1,29 @@
 // src/infrastructure/database/models/index.ts
-import { User } from './user.model';
-import { Address } from './Address';
-import { Category } from './Category';
-import { Product } from './Product';
-import { ProductImage } from './ProductImage';
-import { Cart } from './Cart';
-import { CartItem } from './CartItem';
-import { Order } from './Order';
-import { OrderItem } from './OrderItem';
-import { Quote } from './Quote';
-import { QuoteItem } from './QuoteItem';
-import { Service } from './Service';
-import { ServiceImage } from './ServiceImage';
-import { Blog } from './Blog';
-import { Comment } from './Comment';
-import { Promotion } from './Promotion';
-import { ProductPromotion } from './ProductPromotion';
+import User from './user.model';
+import Address from './address.model';
+import Category from './category.model';
+import Product from './product.model';
+import ProductImage from './product-image.model';
+import Cart from './cart.model';
+import CartItem from './cart-item.model';
+import Order from './order.model';
+import OrderItem from './order-item.model';
+import Quote from './quote.model';
+import QuoteItem from './quote-item.model';
+import BlogPost from './blog-post.model';
+import BlogCategory from './blog-category.model';
+import Comment from './comment.model';
+import Promotion from './promotion.model';
+import PromotionProduct from './promotion-product.model';
+import PromotionCategory from './promotion-category.model';
+import Favorite from './favorite.model';
+import NewsletterSubscription from './newsletter-subscription.model';
+import Invoice from './invoice.model';
+import Tag from './tag.model';
+import PostTag from './post-tag.model';
+import ProductReview from './product-review.model';
 
+// Export all models
 export {
     User,
     Address,
@@ -29,15 +36,21 @@ export {
     OrderItem,
     Quote,
     QuoteItem,
-    Service,
-    ServiceImage,
-    Blog,
+    BlogPost,
+    BlogCategory,
     Comment,
     Promotion,
-    ProductPromotion
+    PromotionProduct,
+    PromotionCategory,
+    Favorite,
+    NewsletterSubscription,
+    Invoice,
+    Tag,
+    PostTag,
+    ProductReview
 };
 
-// src/infrastructure/database/config.ts
+// src/infrastructure/database/config.ts part (already correct, but included for completeness)
 import { Sequelize } from 'sequelize-typescript';
 import dotenv from 'dotenv';
 import path from 'path';

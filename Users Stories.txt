@@ -33,18 +33,14 @@
 20. En tant que client, je dois pouvoir consulter mes devis en cours et passés afin de suivre mes demandes.
 21. En tant que client, je dois pouvoir accepter ou refuser un devis proposé afin de finaliser ou non la prestation.
 
-### Blog et Interaction
-22. En tant que client, je dois pouvoir consulter les articles du blog afin de m'informer sur les sujets liés aux produits.
-23. En tant que client, je dois pouvoir commenter les articles du blog afin de partager mon opinion.
-24. En tant que client, je dois pouvoir noter et évaluer les produits achetés afin de partager mon expérience avec d'autres clients.
-
+	
 ### Favoris et Préférences
 25. En tant que client, je dois pouvoir ajouter des produits à ma liste de favoris afin de les retrouver facilement lors de futures visites.
 26. En tant que client, je dois pouvoir m'abonner à la newsletter afin de recevoir des informations sur les nouveautés et promotions.
 
 ## Rôle: Admin
 
-### Gestion des Produits
+FINI### Gestion des Produits
 27. En tant qu'admin, je dois pouvoir ajouter de nouveaux produits avec tous leurs détails afin d'enrichir le catalogue.
 28. En tant qu'admin, je dois pouvoir modifier les informations des produits existants afin de les maintenir à jour.
 29. En tant qu'admin, je dois pouvoir supprimer des produits du catalogue afin de retirer les articles obsolètes.

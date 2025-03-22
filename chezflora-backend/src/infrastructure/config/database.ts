@@ -44,6 +44,7 @@ const models = [
     Invoice,
     BlogPost,
     BlogCategory,
+    Product,
     ProductImage,
     Comment,
     Tag,

@@ -36,6 +36,7 @@ export default class PromotionCategory extends Model {
     })
     categoryId!: string;
 
-    @BelongsTo(() => Category)
-    category!: Category;
+    // Fix: Utilisez un alias explicite et unique
+    @BelongsTo(() => Category, { as: 'promotionCategory' })
+    promotionCategory!: Category;
 }

@@ -1,4 +1,3 @@
-// src/infrastructure/database/models/blog-post.model.ts
 import { Table, Column, Model, DataType, ForeignKey, BelongsTo, HasMany, BelongsToMany } from 'sequelize-typescript';
 import { v4 as uuidv4 } from 'uuid';
 import User from './user.model';
@@ -53,8 +52,9 @@ export default class BlogPost extends Model {
     })
     categoryId!: string;
 
-    @BelongsTo(() => BlogCategory)
-    category!: BlogCategory;
+    // Fix: Changer l'alias par défaut 'category' en 'blogCategory'
+    @BelongsTo(() => BlogCategory, { as: 'blogCategory' })
+    blogCategory!: BlogCategory;
 
     @ForeignKey(() => User)
     @Column({
@@ -107,7 +107,4 @@ export default class BlogPost extends Model {
         field: 'scheduled_publish_date',
     })
     scheduledPublishDate?: Date;
-
-    @BelongsTo(() => User, 'userId')
-    user?: User;
 }
