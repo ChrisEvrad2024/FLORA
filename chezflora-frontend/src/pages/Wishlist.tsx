@@ -24,30 +24,59 @@ const Wishlist = () => {
   const [wishlistItems, setWishlistItems] = useState<any[]>([]);
   
   useEffect(() => {
-    const loadWishlist = () => {
-      const items = getWishlist();
-      setWishlistItems(items);
+    const fetchFavorites = async () => {
+      try {
+        // Si l'utilisateur est connecté, charger les favoris depuis l'API
+        if (localStorage.getItem('token')) {
+          const response = await FavoriteService.getUserFavorites();
+          setWishlistItems(response.data.data.favorites);
+        } else {
+          // Sinon, utiliser le stockage local
+          const items = getWishlist();
+          setWishlistItems(items);
+        }
+      } catch (error) {
+        console.error("Error fetching favorites:", error);
+        // En cas d'erreur, utiliser les données locales
+        const items = getWishlist();
+        setWishlistItems(items);
+      }
     };
     
-    loadWishlist();
+    fetchFavorites();
     
-    // Listen for storage events to update wishlist when it changes in another tab
-    window.addEventListener('storage', loadWishlist);
-    window.addEventListener('wishlistUpdated', loadWishlist);
+    // Écouter les événements de stockage et wishlist
+    window.addEventListener('storage', fetchFavorites);
+    window.addEventListener('wishlistUpdated', fetchFavorites);
     
     return () => {
-      window.removeEventListener('storage', loadWishlist);
-      window.removeEventListener('wishlistUpdated', loadWishlist);
+      window.removeEventListener('storage', fetchFavorites);
+      window.removeEventListener('wishlistUpdated', fetchFavorites);
     };
   }, []);
   
-  const handleRemoveItem = (id: string) => {
-    removeFromWishlist(id);
-    setWishlistItems(getWishlist());
-    toast.info("Produit retiré", {
-      description: "Le produit a été retiré de votre wishlist",
-      duration: 3000,
-    });
+  const handleRemoveItem = async (id: string) => {
+    try {
+      if (localStorage.getItem('token')) {
+        // Si l'utilisateur est connecté, utiliser l'API
+        await FavoriteService.removeFromFavorite(id);
+      } else {
+        // Sinon, utiliser le stockage local
+        removeFromWishlist(id);
+      }
+      
+      // Mettre à jour l'état local
+      setWishlistItems(wishlistItems.filter(item => item.id !== id));
+      
+      toast.info("Produit retiré", {
+        description: "Le produit a été retiré de votre wishlist",
+        duration: 3000,
+      });
+    } catch (error: any) {
+      toast.error("Erreur", {
+        description: error.response?.data?.message || "Une erreur est survenue lors de la suppression"
+      });
+    }
   };
   
   const handleAddToCart = (item: any) => {

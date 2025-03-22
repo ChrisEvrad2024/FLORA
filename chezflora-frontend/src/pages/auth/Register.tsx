@@ -1,10 +1,10 @@
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import AuthLayout from "@/components/layout/AuthLayout";
+import { AuthService } from "../../services/auth.service";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -24,10 +24,14 @@ const formSchema = z.object({
   firstName: z.string().min(2, "Le prénom doit contenir au moins 2 caractères"),
   lastName: z.string().min(2, "Le nom doit contenir au moins 2 caractères"),
   email: z.string().email("Adresse email invalide"),
-  password: z.string()
+  password: z
+    .string()
     .min(8, "Le mot de passe doit contenir au moins 8 caractères")
-    .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/, "Le mot de passe doit contenir au moins une majuscule, une minuscule et un chiffre"),
-  terms: z.boolean().refine(val => val === true, {
+    .regex(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
+      "Le mot de passe doit contenir au moins une majuscule, une minuscule et un chiffre"
+    ),
+  terms: z.boolean().refine((val) => val === true, {
     message: "Vous devez accepter les conditions d'utilisation",
   }),
 });
@@ -52,31 +56,27 @@ const Register = () => {
   // Form submission handler
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     setIsLoading(true);
-    
+
     try {
-      // Simulate API call
-      console.log("Registration data:", data);
-      
-      // For demo purposes, we'll just simulate a successful registration
-      setTimeout(() => {
-        // In a real app, you would handle registration here
-        localStorage.setItem("isAuthenticated", "true");
-        localStorage.setItem("user", JSON.stringify({ 
-          email: data.email,
-          firstName: data.firstName,
-          lastName: data.lastName
-        }));
-        
-        toast.success("Compte créé avec succès", {
-          description: "Bienvenue sur Floralie ! Votre compte a été créé.",
-        });
-        
-        navigate("/");
-      }, 1000);
-    } catch (error) {
+      // Création du compte via l'API
+      await AuthService.register({
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        password: data.password,
+      });
+
+      toast.success("Compte créé avec succès", {
+        description: "Bienvenue sur Floralie ! Votre compte a été créé.",
+      });
+
+      navigate("/");
+    } catch (error: any) {
       console.error("Registration error:", error);
       toast.error("Échec de la création du compte", {
-        description: "Une erreur s'est produite. Veuillez réessayer.",
+        description:
+          error.response?.data?.message ||
+          "Une erreur s'est produite. Veuillez réessayer.",
       });
     } finally {
       setIsLoading(false);
@@ -101,17 +101,17 @@ const Register = () => {
                 <FormItem>
                   <FormLabel>Prénom</FormLabel>
                   <FormControl>
-                    <Input 
-                      placeholder="Votre prénom" 
+                    <Input
+                      placeholder="Votre prénom"
                       disabled={isLoading}
-                      {...field} 
+                      {...field}
                     />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            
+
             <FormField
               control={form.control}
               name="lastName"
@@ -119,10 +119,10 @@ const Register = () => {
                 <FormItem>
                   <FormLabel>Nom</FormLabel>
                   <FormControl>
-                    <Input 
-                      placeholder="Votre nom" 
+                    <Input
+                      placeholder="Votre nom"
                       disabled={isLoading}
-                      {...field} 
+                      {...field}
                     />
                   </FormControl>
                   <FormMessage />
@@ -130,7 +130,7 @@ const Register = () => {
               )}
             />
           </div>
-          
+
           <FormField
             control={form.control}
             name="email"
@@ -138,19 +138,19 @@ const Register = () => {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input 
-                    placeholder="votre@email.fr" 
+                  <Input
+                    placeholder="votre@email.fr"
                     type="email"
                     autoComplete="email"
                     disabled={isLoading}
-                    {...field} 
+                    {...field}
                   />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-          
+
           <FormField
             control={form.control}
             name="password"
@@ -159,14 +159,14 @@ const Register = () => {
                 <FormLabel>Mot de passe</FormLabel>
                 <FormControl>
                   <div className="relative">
-                    <Input 
-                      placeholder="Créez un mot de passe sécurisé" 
+                    <Input
+                      placeholder="Créez un mot de passe sécurisé"
                       type={showPassword ? "text" : "password"}
                       autoComplete="new-password"
                       disabled={isLoading}
-                      {...field} 
+                      {...field}
                     />
-                    <button 
+                    <button
                       type="button"
                       className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
                       onClick={togglePasswordVisibility}
@@ -179,7 +179,7 @@ const Register = () => {
               </FormItem>
             )}
           />
-          
+
           <FormField
             control={form.control}
             name="terms"
@@ -199,7 +199,10 @@ const Register = () => {
                       conditions d'utilisation
                     </Link>{" "}
                     et la{" "}
-                    <Link to="/privacy" className="text-primary hover:underline">
+                    <Link
+                      to="/privacy"
+                      className="text-primary hover:underline"
+                    >
                       politique de confidentialité
                     </Link>
                   </FormLabel>
@@ -208,12 +211,8 @@ const Register = () => {
               </FormItem>
             )}
           />
-          
-          <Button 
-            type="submit" 
-            className="w-full"
-            disabled={isLoading}
-          >
+
+          <Button type="submit" className="w-full" disabled={isLoading}>
             {isLoading ? "Création du compte..." : "Créer mon compte"}
           </Button>
         </form>

@@ -41,6 +41,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogT
 import { ProductForm } from "@/components/admin/ProductForm";
 import { Product } from "@/types/product";
 import { getAllProducts, getAllCategories } from "@/lib/data";
+import { ProductService } from "@/services/product.service";
 
 const ProductsManagement = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -62,11 +63,18 @@ const ProductsManagement = () => {
   );
   
   // Handle product deletion
-  const handleDeleteProduct = (productId: string) => {
-    setProducts(products.filter(product => product.id !== productId));
-    toast.success("Produit supprimé", {
-      description: "Le produit a été supprimé avec succès."
-    });
+  const handleDeleteProduct = async (productId: string) => {
+    try {
+      await ProductService.deleteProduct(productId);
+      setProducts(products.filter(product => product.id !== productId));
+      toast.success("Produit supprimé", {
+        description: "Le produit a été supprimé avec succès."
+      });
+    } catch (error: any) {
+      toast.error("Erreur", {
+        description: error.response?.data?.message || "Erreur lors de la suppression du produit"
+      });
+    }
   };
 
   // Handle edit product
@@ -82,21 +90,29 @@ const ProductsManagement = () => {
   };
 
   // Handle save product
-  const handleSaveProduct = (product: Product) => {
-    if (editingProduct) {
-      // Update existing product
-      setProducts(products.map(p => p.id === product.id ? product : p));
-      toast.success("Produit mis à jour", {
-        description: "Le produit a été mis à jour avec succès."
-      });
-    } else {
-      // Add new product
-      setProducts([...products, product]);
-      toast.success("Produit ajouté", {
-        description: "Le produit a été ajouté avec succès."
+  const handleSaveProduct = async (product: Product) => {
+    try {
+      if (editingProduct) {
+        // Mettre à jour un produit existant
+        await ProductService.updateProduct(product.id, product);
+        setProducts(products.map(p => p.id === product.id ? product : p));
+        toast.success("Produit mis à jour", {
+          description: "Le produit a été mis à jour avec succès."
+        });
+      } else {
+        // Ajouter un nouveau produit
+        const response = await ProductService.createProduct(product);
+        setProducts([...products, response.data.data]);
+        toast.success("Produit ajouté", {
+          description: "Le produit a été ajouté avec succès."
+        });
+      }
+      setIsDialogOpen(false);
+    } catch (error: any) {
+      toast.error("Erreur", {
+        description: error.response?.data?.message || "Une erreur est survenue"
       });
     }
-    setIsDialogOpen(false);
   };
   
   // Get status badge color

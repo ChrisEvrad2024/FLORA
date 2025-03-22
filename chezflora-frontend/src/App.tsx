@@ -2,6 +2,8 @@
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { AuthProvider } from "./contexts/AuthContext";
+import AuthGuard from "./components/guards/AuthGuard";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
@@ -61,7 +63,7 @@ const App = () => (
           </Route>
           
           {/* Admin Routes */}
-          <Route path="/admin" element={<AdminLayout />}>
+          <Route path="/admin" element={<AuthGuard requiredRole={["admin", "super_admin"]}><AdminLayout /></AuthGuard>}>
             <Route index element={<AdminDashboard />} />
             <Route path="products" element={<ProductsManagement />} />
             <Route path="blog" element={<BlogManagement />} />

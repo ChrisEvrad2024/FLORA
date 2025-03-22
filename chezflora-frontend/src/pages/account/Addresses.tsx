@@ -1,5 +1,5 @@
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { AddressService } from '../../services/address.service';
 import { 
   Card, 
   CardContent, 
@@ -141,6 +141,26 @@ const Addresses = () => {
   const [addresses, setAddresses] = useState<Address[]>(initialAddresses);
   const [editingAddress, setEditingAddress] = useState<Address | null>(null);
   const [openDialog, setOpenDialog] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchAddresses = async () => {
+      try {
+        setLoading(true);
+        const response = await AddressService.getUserAddresses();
+        setAddresses(response.data.data);
+      } catch (error: any) {
+        console.error("Error fetching addresses:", error);
+        toast.error("Erreur lors du chargement des adresses", {
+          description: error.response?.data?.message || "Veuillez réessayer ultérieurement"
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchAddresses();
+  }, []);
 
   // Initialize the form
   const form = useForm<z.infer<typeof addressFormSchema>>({
@@ -199,72 +219,46 @@ const Addresses = () => {
   };
 
   // Handle address deletion
-  const handleDeleteAddress = (id: string) => {
-    setAddresses(addresses.filter((addr) => addr.id !== id));
-    toast.success("Adresse supprimée", {
-      description: "L'adresse a été supprimée avec succès.",
-    });
+  const handleDeleteAddress = async (id: string) => {
+    try {
+      await AddressService.deleteAddress(id);
+      setAddresses(addresses.filter(addr => addr.id !== id));
+      toast.success("Adresse supprimée", {
+        description: "L'adresse a été supprimée avec succès."
+      });
+    } catch (error: any) {
+      toast.error("Erreur", {
+        description: error.response?.data?.message || "Erreur lors de la suppression de l'adresse"
+      });
+    }
   };
 
   // Handle form submission
-  const onSubmit = (data: z.infer<typeof addressFormSchema>) => {
-    // Check if this is a default address
-    if (data.isDefault) {
-      setAddresses(addresses.map((addr) => {
-        if (addr.type === data.type && (!editingAddress || addr.id !== editingAddress.id)) {
-          return { ...addr, isDefault: false };
-        }
-        return addr;
-      }));
-    }
-
-    if (editingAddress) {
-      // Update existing address
-      setAddresses(addresses.map((addr) => {
-        if (addr.id === editingAddress.id) {
-          return { 
-            id: addr.id,
-            nickname: data.nickname,
-            type: data.type,
-            firstName: data.firstName,
-            lastName: data.lastName,
-            addressLine1: data.addressLine1,
-            addressLine2: data.addressLine2 || "",
-            city: data.city,
-            postalCode: data.postalCode,
-            country: data.country,
-            phone: data.phone,
-            isDefault: data.isDefault
-          };
-        }
-        return addr;
-      }));
-      toast.success("Adresse mise à jour", {
-        description: "Vos modifications ont été enregistrées.",
-      });
-    } else {
-      // Add new address
-      const newAddress: Address = {
-        id: `addr-${Date.now()}`,
-        nickname: data.nickname,
-        type: data.type,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        addressLine1: data.addressLine1,
-        addressLine2: data.addressLine2 || "",
-        city: data.city,
-        postalCode: data.postalCode,
-        country: data.country,
-        phone: data.phone,
-        isDefault: data.isDefault
-      };
-      setAddresses([...addresses, newAddress]);
-      toast.success("Adresse ajoutée", {
-        description: "La nouvelle adresse a été ajoutée avec succès.",
+  const onSubmit = async (data: z.infer<typeof addressFormSchema>) => {
+    try {
+      if (editingAddress) {
+        // Mettre à jour une adresse existante
+        const response = await AddressService.updateAddress(editingAddress.id, data);
+        setAddresses(addresses.map(addr => 
+          addr.id === editingAddress.id ? response.data.data : addr
+        ));
+        toast.success("Adresse mise à jour", {
+          description: "Vos modifications ont été enregistrées."
+        });
+      } else {
+        // Ajouter une nouvelle adresse
+        const response = await AddressService.createAddress(data);
+        setAddresses([...addresses, response.data.data]);
+        toast.success("Adresse ajoutée", {
+          description: "La nouvelle adresse a été ajoutée avec succès."
+        });
+      }
+      setOpenDialog(false);
+    } catch (error: any) {
+      toast.error("Erreur", {
+        description: error.response?.data?.message || "Une erreur est survenue"
       });
     }
-
-    setOpenDialog(false);
   };
 
   // Get shipping and billing addresses

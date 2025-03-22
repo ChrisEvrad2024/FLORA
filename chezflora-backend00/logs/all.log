@@ -4328,3 +4328,10 @@
 {"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 14:21:17"}
 {"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 14:21:17"}
 {"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 14:21:17"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 14:21:53"}
+{"level":"debug","message":"Executing (default): SELECT 1+1 AS result","timestamp":"2025-03-22 14:21:53"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 14:21:53"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 14:21:53"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2025-03-22 14:21:53"}
+{"level":"info","message":"Database already initialized, skipping synchronization","timestamp":"2025-03-22 14:21:53"}
+{"level":"debug","message":"Executing (default): SELECT count(*) AS `count` FROM `newsletter_subscriptions` AS `NewsletterSubscription` WHERE `NewsletterSubscription`.`active` = true AND `NewsletterSubscription`.`confirmed_at` IS NOT NULL;","timestamp":"2025-03-22 14:22:11"}

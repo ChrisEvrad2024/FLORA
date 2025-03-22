@@ -35,6 +35,7 @@ import {
   PendingQuoteRequestsCard,
   AdminNotifications 
 } from "@/components/admin/AdminDashboardAlerts";
+import { CategoryService } from "@/services/category.service";
 
 const AdminDashboard = () => {
   const [totalProducts, setTotalProducts] = useState(0);
@@ -44,17 +45,25 @@ const AdminDashboard = () => {
   const [lowStockProducts, setLowStockProducts] = useState<Product[]>([]);
   
   useEffect(() => {
-    // Load data
-    const products = getAllProducts();
-    setTotalProducts(products.length);
+    const fetchData = async () => {
+      try {
+        // Charger les produits
+        const productsResponse = await ProductService.getAllProducts();
+        setProducts(productsResponse.data.data.products);
+        
+        // Charger les catégories
+        const categoriesResponse = await CategoryService.getAllCategories();
+        setCategories(categoriesResponse.data.data.categories.map((cat: any) => ({
+          id: cat.id,
+          name: cat.name
+        })));
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        toast.error("Erreur lors du chargement des données");
+      }
+    };
     
-    // Filter low stock products (stock < 5)
-    setLowStockProducts(products.filter(product => product.stock !== undefined && product.stock < 5));
-    
-    // This would come from an API in a real application
-    setTotalOrders(124);
-    setTotalCustomers(85);
-    setTotalRevenue(7845.50);
+    fetchData();
   }, []);
   
   // Sales data for charts

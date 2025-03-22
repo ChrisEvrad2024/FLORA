@@ -1,6 +1,6 @@
-
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { AuthService } from "../../services/auth.service";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -43,54 +43,45 @@ const Login = () => {
   // Form submission handler
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     setIsLoading(true);
-    
+
     try {
-      // Check for admin user (admin@admin.com with any password)
-      // Using toLowerCase() to ensure case-insensitive comparison
+      // Pour maintenir l'accès administrateur à des fins de démonstration
       if (data.email.toLowerCase() === "admin@admin.com") {
         console.log("Admin login detected");
-        
-        // Set admin user in localStorage
         localStorage.setItem("isAuthenticated", "true");
-        localStorage.setItem("user", JSON.stringify({ 
-          email: data.email,
-          role: "admin",
-          name: "Administrateur",
-          createdAt: new Date().toISOString()
-        }));
-        
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            email: data.email,
+            role: "admin",
+            name: "Administrateur",
+            createdAt: new Date().toISOString(),
+          })
+        );
+
         toast.success("Connexion administrateur réussie", {
           description: "Bienvenue dans l'interface d'administration",
         });
-        
-        // Force navigation to admin dashboard with a slight delay to ensure localStorage is set
+
         setTimeout(() => {
           navigate("/admin");
         }, 200);
-        
         return;
       }
-      
-      // For regular users (simulated login)
-      console.log("Regular login attempt:", data.email);
-      
-      localStorage.setItem("isAuthenticated", "true");
-      localStorage.setItem("user", JSON.stringify({ 
-        email: data.email,
-        role: "customer",
-        name: data.email.split('@')[0],
-        createdAt: new Date().toISOString()
-      }));
-      
+
+      // Connexion normale via l'API
+      const response = await AuthService.login(data.email, data.password);
       toast.success("Connexion réussie", {
         description: "Bienvenue sur votre compte Floralie",
       });
-      
+
       navigate(from === "/admin" ? "/" : from);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Login error:", error);
       toast.error("Échec de la connexion", {
-        description: "Vérifiez vos identifiants et réessayez",
+        description:
+          error.response?.data?.message ||
+          "Vérifiez vos identifiants et réessayez",
       });
     } finally {
       setIsLoading(false);
@@ -113,19 +104,19 @@ const Login = () => {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input 
-                    placeholder="votre@email.fr" 
-                    type="email" 
+                  <Input
+                    placeholder="votre@email.fr"
+                    type="email"
                     autoComplete="email"
                     disabled={isLoading}
-                    {...field} 
+                    {...field}
                   />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-          
+
           <FormField
             control={form.control}
             name="password"
@@ -133,8 +124,8 @@ const Login = () => {
               <FormItem>
                 <div className="flex items-center justify-between">
                   <FormLabel>Mot de passe</FormLabel>
-                  <Link 
-                    to="/auth/forgot-password" 
+                  <Link
+                    to="/auth/forgot-password"
                     className="text-xs text-muted-foreground hover:text-primary transition-colors"
                   >
                     Mot de passe oublié ?
@@ -142,14 +133,14 @@ const Login = () => {
                 </div>
                 <FormControl>
                   <div className="relative">
-                    <Input 
-                      placeholder="Votre mot de passe" 
+                    <Input
+                      placeholder="Votre mot de passe"
                       type={showPassword ? "text" : "password"}
                       autoComplete="current-password"
                       disabled={isLoading}
-                      {...field} 
+                      {...field}
                     />
-                    <button 
+                    <button
                       type="button"
                       className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
                       onClick={togglePasswordVisibility}
@@ -162,17 +153,13 @@ const Login = () => {
               </FormItem>
             )}
           />
-          
-          <Button 
-            type="submit" 
-            className="w-full"
-            disabled={isLoading}
-          >
+
+          <Button type="submit" className="w-full" disabled={isLoading}>
             {isLoading ? "Connexion en cours..." : "Se connecter"}
           </Button>
         </form>
       </Form>
-      
+
       <div className="mt-6 text-center">
         <p className="text-sm text-muted-foreground">
           Vous n'avez pas de compte ?{" "}
@@ -181,11 +168,12 @@ const Login = () => {
           </Link>
         </p>
       </div>
-      
+
       <div className="mt-8 p-4 bg-muted rounded-md">
         <p className="text-sm text-center font-medium">Accès administrateur</p>
         <p className="text-xs text-center text-muted-foreground mt-1">
-          Utilisez admin@admin.com avec n'importe quel mot de passe pour accéder à l'interface d'administration.
+          Utilisez admin@admin.com avec n'importe quel mot de passe pour accéder
+          à l'interface d'administration.
         </p>
       </div>
     </AuthLayout>
