@@ -47,7 +47,7 @@ export default class BlogComment extends Model {
 
     @Column({
         type: DataType.ENUM('pending', 'approved', 'rejected'),
-        defaultValue: 'pending',
+        defaultValue: 'approved',
     })
     status!: string;
 }

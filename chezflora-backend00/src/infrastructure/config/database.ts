@@ -41,7 +41,7 @@ const models = [
     NewsletterSubscription,
     BlogCategory,
     BlogTag,
-    
+
     // Modèles avec dépendances simples
     BlogPost,
     Cart,
@@ -49,7 +49,7 @@ const models = [
     Quote,
     Invoice,
     Favorite,
-    
+
     // Modèles avec dépendances complexes
     BlogComment,
     CartItem,
@@ -77,13 +77,13 @@ const checkDbInitialization = async (): Promise<boolean> => {
     try {
         // Vérifier si le fichier d'état existe
         const dbStateFilePath = path.join(__dirname, '../../../db-initialized.json');
-        
+
         if (fs.existsSync(dbStateFilePath)) {
             // Le fichier existe, vérifier si l'initialisation est nécessaire
             const dbState = JSON.parse(fs.readFileSync(dbStateFilePath, 'utf8'));
             return !dbState.initialized;
         }
-        
+
         return true; // Le fichier n'existe pas, initialisation nécessaire
     } catch (error) {
         logger.error('Error checking database initialization state:', error);
@@ -109,15 +109,15 @@ export const initDatabase = async (): Promise<void> => {
 
         // Vérifier si l'initialisation est nécessaire
         const shouldInitialize = await checkDbInitialization();
-        
+
         if (process.env.NODE_ENV === 'development' && shouldInitialize) {
             logger.info('Initializing database...');
-            
+
             const shouldForce = process.env.DB_FORCE_SYNC === 'true';
-            
+
             // Désactiver les vérifications de clés étrangères
             await sequelize.query('SET FOREIGN_KEY_CHECKS = 0');
-            
+
             try {
                 // Synchroniser les modèles
                 if (shouldForce) {
@@ -129,40 +129,40 @@ export const initDatabase = async (): Promise<void> => {
                     // C'est pourquoi nous gérons les erreurs explicitement
                     await sequelize.sync({ alter: true }).catch(async (syncError) => {
                         logger.warn('Error during alter sync:', syncError.message);
-                        
+
                         // Si l'erreur concerne une contrainte de clé étrangère spécifique
                         if (syncError.message.includes("Can't DROP FOREIGN KEY")) {
                             const tableMatch = syncError.message.match(/`(\w+)`/g);
                             const constraintMatch = syncError.message.match(/`(\w+_ibfk_\d+)`/);
-                            
+
                             if (tableMatch && tableMatch.length >= 1) {
                                 const tableName = tableMatch[0].replace(/`/g, '');
                                 logger.info(`Problem with table: ${tableName}`);
-                                
+
                                 // Récupérer toutes les contraintes existantes
                                 const [constraints] = await sequelize.query(
                                     `SELECT CONSTRAINT_NAME FROM information_schema.TABLE_CONSTRAINTS 
                                      WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND CONSTRAINT_TYPE = 'FOREIGN KEY'`,
-                                    { 
+                                    {
                                         replacements: [
-                                            process.env.DB_NAME || 'chezflora', 
+                                            process.env.DB_NAME || 'chezflora',
                                             tableName
-                                        ] 
+                                        ]
                                     }
                                 );
-                                
+
                                 logger.info(`Found ${(constraints as any[]).length} foreign key constraints on ${tableName}`);
-                                
+
                                 // Supprimer chaque contrainte trouvée
                                 for (const constraint of constraints as any[]) {
                                     const constraintName = constraint.CONSTRAINT_NAME;
                                     logger.info(`Dropping foreign key constraint: ${constraintName}`);
                                     await sequelize.query(`ALTER TABLE ${tableName} DROP FOREIGN KEY \`${constraintName}\``);
                                 }
-                                
+
                                 // Essayer à nouveau de synchroniser cette table spécifique
                                 await sequelize.query(`DROP TABLE IF EXISTS ${tableName}`);
-                                
+
                                 // Continuer avec la synchronisation des modèles
                                 await sequelize.sync({ alter: true });
                             }
@@ -175,10 +175,10 @@ export const initDatabase = async (): Promise<void> => {
                 // Réactiver les vérifications de clés étrangères
                 await sequelize.query('SET FOREIGN_KEY_CHECKS = 1');
             }
-            
+
             // Marquer la base de données comme initialisée
             await markDbAsInitialized();
-            
+
             logger.info(`Database synchronized (force: ${shouldForce})`);
         } else {
             logger.info('Database already initialized, skipping synchronization');
